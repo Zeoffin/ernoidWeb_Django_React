@@ -1,4 +1,4 @@
 from django.shortcuts import render
 
-# Create your views here.
-# For init commit
+def main(request, *args, **kwargs):
+    return render(request, 'ernoid/index.html')

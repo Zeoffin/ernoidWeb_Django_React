@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ernoid.apps.ErnoidConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
