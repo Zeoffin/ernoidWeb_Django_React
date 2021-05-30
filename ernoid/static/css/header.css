@@ -45,7 +45,6 @@ Override bootstrap dropdown attributes
 .header-dropdown-toggle {
     background-color: black !important;
     border-color: black !important;
-    color: #828282 !important;
     font-size: 17px !important;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
     margin-left: 50px !important;
@@ -54,7 +53,6 @@ Override bootstrap dropdown attributes
 .header-dropdown-home {
     background-color: black !important;
     border-color: black !important;
-    color: white !important;
     font-size: 17px !important;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
 }

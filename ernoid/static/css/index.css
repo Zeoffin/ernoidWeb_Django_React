@@ -2,6 +2,7 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    width: 100%;
 }
 
 #main {
@@ -17,4 +18,8 @@ html, body {
     height: 100%;
     display: flex;
     background-color: gray;
+}
+
+.MuiGrid-root {
+    width: 100% !important;
 }

@@ -20,7 +20,8 @@ export default class HomePage extends Component {
                               showArrows={false}
                               showStatus={false}
                               infiniteLoop={true}
-                              dynamicHeight={true}>
+                              dynamicHeight={true}
+                              interval={3000}>
                         <div>
                             <img src="http://lorempixel.com/output/cats-q-c-640-480-1.jpg" />
                         </div>
@@ -36,6 +37,13 @@ export default class HomePage extends Component {
                     <div className={"home-featured-title"}>
                         <b>FEATURED COLLECTION</b>
                         <p>CENSORED</p>
+                    </div>
+                    <div>
+                        <Grid container direction="row" justify="center" alignItems="center">
+                            <p>Viens</p>
+                            <p>Divi</p>
+                            <p>Trīs</p>
+                        </Grid>
                     </div>
                 </div>
             </Grid>

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ernoid.apps.ErnoidConfig',
     'rest_framework',
+    'api.apps.ApiConfig'
 ]
 
 MIDDLEWARE = [

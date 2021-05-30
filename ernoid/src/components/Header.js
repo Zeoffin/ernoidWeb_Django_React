@@ -6,55 +6,48 @@ import Dropdown from "react-bootstrap/cjs/Dropdown";
 /**
  * The header file is responsible for the header bar and main navigation functionality.
  */
-export default class HomePage extends Component {
+export default function HomePage() {
+    let pathname = window.location.pathname.toString();
+    console.log(pathname);
+    return (
+        <div className={"header-style"}>
+            <Grid container direction="row" justify="center" alignItems="center">
 
-    constructor(props) {
-        super(props);
-    }
+                <p className={"header-logo"}>IMG ERNOID</p>
 
-    render() {
-        return (
-            <div className={"header-style"}>
-                <Grid container direction="row" justify="center" alignItems="center">
+                <div className={"header-navigation"}>
+                    <Grid container direction="row" justify="center" alignItems="center">
+                        <Button className={"header-dropdown-home"} href={"/"} style={pathname==="/" ? {color: 'white'} : {color: '#828282'}}>HOME</Button>
 
-                    <p className={"header-logo"}>IMG ERNOID</p>
+                        <Dropdown>
+                          <Dropdown.Toggle className={"header-dropdown-toggle"} style={pathname==="/collections" ? {color: 'white'} : {color: '#828282'}}>COLLECTIONS</Dropdown.Toggle>
 
-                    <div className={"header-navigation"}>
-                        <Grid container direction="row" justify="center" alignItems="center">
-                            <Button className={"header-dropdown-home"}>HOME</Button>
+                          <Dropdown.Menu className={"header-dropdown-menu"}>
+                            <Dropdown.Item className={"header-dropdown-item"} href="collections">ALL COLLECTIONS</Dropdown.Item>
+                            <Dropdown.Item className={"header-dropdown-item"} href="#/action-1">CLASSIC</Dropdown.Item>
+                            <Dropdown.Item className={"header-dropdown-item"} href="#/action-2">TILTED COLORS</Dropdown.Item>
+                            <Dropdown.Item className={"header-dropdown-item"} href="#/action-3">CENSORED</Dropdown.Item>
+                          </Dropdown.Menu>
+                        </Dropdown>
 
-                            <Dropdown>
-                              <Dropdown.Toggle className={"header-dropdown-toggle"}>
-                                COLLECTIONS
-                              </Dropdown.Toggle>
+                        <Dropdown>
+                          <Dropdown.Toggle className={"header-dropdown-toggle"} style={pathname==="/clothes" ? {color: 'white'} : {color: '#828282'}}>CLOTHES</Dropdown.Toggle>
 
-                              <Dropdown.Menu className={"header-dropdown-menu"}>
-                                <Dropdown.Item className={"header-dropdown-item"} href="#/action-1">CLASSIC</Dropdown.Item>
-                                <Dropdown.Item className={"header-dropdown-item"} href="#/action-2">TILTED COLORS</Dropdown.Item>
-                                <Dropdown.Item className={"header-dropdown-item"} href="#/action-3">CENSORED</Dropdown.Item>
-                              </Dropdown.Menu>
-                            </Dropdown>
+                          <Dropdown.Menu className={"header-dropdown-menu"}>
+                            <Dropdown.Item className={"header-dropdown-item"} href="clothes">ALL</Dropdown.Item>
+                            <Dropdown.Item className={"header-dropdown-item"} href="#/action-1">T-SHIRT</Dropdown.Item>
+                            <Dropdown.Item className={"header-dropdown-item"} href="#/action-2">SWEATSHIRT</Dropdown.Item>
+                            <Dropdown.Item className={"header-dropdown-item"} href="#/action-3">HOODIE</Dropdown.Item>
+                            <Dropdown.Item className={"header-dropdown-item"} href="#/action-4">DRESS</Dropdown.Item>
+                            <Dropdown.Item className={"header-dropdown-item"} href="#/action-5">HAT</Dropdown.Item>
+                          </Dropdown.Menu>
+                        </Dropdown>
+                    </Grid>
+                </div>
 
-                            <Dropdown>
-                              <Dropdown.Toggle className={"header-dropdown-toggle"}>
-                                CLOTHES
-                              </Dropdown.Toggle>
+                {/* TODO: Cart checkout */}
 
-                              <Dropdown.Menu className={"header-dropdown-menu"}>
-                                <Dropdown.Item className={"header-dropdown-item"} href="#/action-1">T-SHIRT</Dropdown.Item>
-                                <Dropdown.Item className={"header-dropdown-item"} href="#/action-2">SWEATSHIRT</Dropdown.Item>
-                                <Dropdown.Item className={"header-dropdown-item"} href="#/action-3">HOODIE</Dropdown.Item>
-                                <Dropdown.Item className={"header-dropdown-item"} href="#/action-4">DRESS</Dropdown.Item>
-                                <Dropdown.Item className={"header-dropdown-item"} href="#/action-5">HAT</Dropdown.Item>
-                              </Dropdown.Menu>
-                            </Dropdown>
-                        </Grid>
-                    </div>
-
-                    {/* TODO: Cart checkout */}
-
-                </Grid>
-            </div>
-        );
-    }
+            </Grid>
+        </div>
+    );
 }
