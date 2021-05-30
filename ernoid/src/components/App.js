@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
+import HomePage from "./HomePage";
+import Header from "./Header";
+import Grid from "@material-ui/core/Grid";
 
 export default class App extends Component {
     constructor(props) {
@@ -7,7 +10,12 @@ export default class App extends Component {
     }
 
     render() {
-        return (<h1>Ernoid WebApp</h1>)
+        return (
+            <Grid>
+                <Header/>
+                <HomePage/>
+            </Grid>
+        )
     }
 }
 
