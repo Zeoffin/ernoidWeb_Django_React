@@ -1,0 +1,33 @@
+.footer-main {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 200px;
+    background-color: black;
+}
+
+.footer-main b {
+    color: white;
+    font-size: 24px;
+    line-height: 2;
+    margin: 0;
+    letter-spacing: 3px;
+}
+
+.footer-main p {
+    color: white;
+    font-size: 18px;
+    line-height: 1.2;
+    margin: 0;
+    font-weight: 10;
+    letter-spacing: 0.07em;
+}
+
+.footer-main-div {
+    margin-top: 1em;
+}
+
+.footer-pic-limit {
+    width: auto;
+    height: auto;
+}

@@ -3,6 +3,7 @@
     color: white;
     background-color: #5b80b2;
     -ms-transform: translateY(50%);
+    height: auto;
 }
 
 .home-featured {

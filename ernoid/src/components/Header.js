@@ -13,7 +13,7 @@ export default function HomePage() {
         <div className={"header-style"}>
             <Grid container direction="row" justify="center" alignItems="center">
 
-                <p className={"header-logo"}>IMG ERNOID</p>
+                <img className={"header-logo"} src={"/static/images/branding/ERNOID_Typography_White.png"}/>
 
                 <div className={"header-navigation"}>
                     <Grid container direction="row" justify="center" alignItems="center">

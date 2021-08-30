@@ -5,6 +5,7 @@ import Header from "./Header";
 import Collections from "./Collections";
 import Clothes from "./Clothes";
 import Grid from "@material-ui/core/Grid";
+import Footer from "./Footer";
 import {BrowserRouter as Router, Switch, Route, Link, Redirect} from "react-router-dom";
 
 export default class App extends Component {
@@ -23,6 +24,7 @@ export default class App extends Component {
                         <Route path={"/clothes"} component={Clothes}/>
                     </Switch>
                 </Router>
+                <Footer/>
             </Grid>
         )
     }
