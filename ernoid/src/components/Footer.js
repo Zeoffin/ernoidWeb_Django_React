@@ -16,11 +16,12 @@ export default function Footer() {
             <div className={"footer-main-div"} style={{marginRight: '80px'}}>
                 <Grid className={"footer-main-div"} container direction="column"  alignItems="center">
                     <b>FOLLOW</b>
-                    <Grid container direction="row" alignItems="center">
-                        {/*TODO: Add link to instagram*/}
-                        <img className={"footer-pic-limit"} style={{maxHeight: '30px'}} src={"static/images/assets/insta_white.png"}/>
-                        <p>ERNOID</p>
-                    </Grid>
+                        <a href="https://instagram.com/ernoid?utm_medium=copy_link" style={{textDecoration: 'none'}}>
+                            <Grid container direction="row" alignItems="center">
+                                <img className={"footer-pic-limit"} style={{maxHeight: '30px'}} src={"static/images/assets/insta_white.png"}/>
+                                <p>ERNOID</p>
+                            </Grid>
+                        </a>
                 </Grid>
             </div>
             <div className={"footer-main-div"}>

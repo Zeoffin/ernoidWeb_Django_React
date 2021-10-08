@@ -8,6 +8,10 @@ export default class HomePage extends Component {
         super(props);
     }
 
+    getClothing() {
+        fetch("/api/clothing")
+    }
+
     render() {
 
         {/* TODO: Change display images */}

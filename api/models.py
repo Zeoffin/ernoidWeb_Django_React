@@ -32,4 +32,4 @@ class Clothing(models.Model):
     material = models.CharField(max_length=40, default="")
 
     def __str__(self):
-        return self.collection.name.capitalize(), ' ', self.type.name.capitalize(), ' ', self.colour.name.capitalize()
+        return str(self.collection.name.capitalize() + ' ' + self.type.name.capitalize() + ' ' + self.colour.name.capitalize())
