@@ -8,7 +8,6 @@ import Dropdown from "react-bootstrap/cjs/Dropdown";
  */
 export default function HomePage() {
     let pathname = window.location.pathname.toString();
-    console.log(pathname);
     return (
         <div className={"header-style"}>
             <Grid container direction="row" justify="center" alignItems="center">

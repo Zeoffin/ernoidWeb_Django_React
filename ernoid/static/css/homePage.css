@@ -13,8 +13,86 @@
 }
 
 .home-featured-title {
-    font-size: 30px;
+    font-size: 40px;
     padding-top: 50px;
+}
+
+.home-featured-collection-title {
+    margin-top: -10px;
+    text-transform: uppercase;
+    letter-spacing: .2rem;
+    font-weight: 100;
+}
+
+.home-featured-preview-images {
+    width: 200px;
+    height: 200px;
+}
+
+.home-featured-preview {
+    margin-right: 100px;
+}
+
+.home-featured-preview-center {
+    margin-right: 100px;
+}
+
+.home-featured-preview-description {
+    text-align: left;
+    margin-left: 20px;
+}
+
+.home-featured-preview-description-collection {
+    margin-bottom: 0 !important;
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+}
+
+.home-featured-preview-description-type {
+    margin-bottom: 0 !important;
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+    font-weight: 100;
+}
+
+.home-featured-collection {
+    text-transform: uppercase;
+    font-size: 40px;
+    text-align: left;
+    margin-bottom: 0px;
+    font-weight: bold;
+    letter-spacing: .1rem;
+}
+
+.home-featured-header {
+    margin-top: -10px;
+    text-transform: uppercase;
+    font-size: 35px;
+    text-align: left;
+    letter-spacing: .1rem;
+}
+
+.home-featured-main-colours {
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+    font-size: 30px;
+}
+
+.home-featured-description {
+    width: 450px;
+    font-size: 25px;
+    text-align: left;
+}
+
+.home-featured-features {
+    text-align: left;
+    font-size: 25px;
+    line-height: 35px;
+}
+
+.home-featured-main-image {
+    width: 300px;
+    height: 300px;
 }
 
 /*
