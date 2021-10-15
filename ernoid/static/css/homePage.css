@@ -95,6 +95,33 @@
     height: 300px;
 }
 
+.home-description-container {
+    padding-top: 50px;
+    padding-bottom: 100px;
+}
+
+.home-description-image {
+    margin-right: 70px;
+    width: 350px;
+    height: 350px;
+}
+
+.home-description-text-container {
+    text-align: left;
+    line-height: 30px;
+}
+
+.home-description-slogan {
+    padding-top: 15px;
+    font-size: 25px;
+    letter-spacing: .1rem;
+}
+
+.home-description-textbox {
+    font-size: 25px;
+    letter-spacing: .1rem;
+}
+
 /*
 Override carousel default settings
  */

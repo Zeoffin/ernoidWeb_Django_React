@@ -29,7 +29,8 @@ class GetFeaturedCollection(APIView):
     def get(self, request):
 
         response = []
-        data = Clothing.objects.filter(collection__name='censored') # TODO: Change CENSORED to a better way for display
+        colour = request.GET.get('colour')
+        data = Clothing.objects.filter(collection__name='censored', colour__name=colour) # TODO: Change CENSORED to a better way for display
 
         for item in data:
             response.append(

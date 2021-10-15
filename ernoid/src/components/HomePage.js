@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
-import { Grid } from '@material-ui/core';
+import { Grid, FormControlLabel, Radio, RadioGroup, FormControl, FormLabel } from '@material-ui/core';
 import data from "bootstrap/js/src/dom/data";
 
 export default class HomePage extends Component {
@@ -14,20 +14,40 @@ export default class HomePage extends Component {
             beanie: {},
             hoodie_v1: {},
             hoodie_v2: {},
-            colour: null,
+            colour: 'Black',
+            color_choices: [],
             description: null,
         };
-        this.getClothing();
+        this.getClothing('Black');  // Set default selected colour to black
+        this.getColours();
     }
 
-    getClothing() {
-        fetch("/api/featured-collection")
+    getColours() {
+        fetch("/api/colours")
+            .then((response) => response.json())
+            .then((data) => {
+               this.setState({
+                 color_choices: data
+               });
+            });
+    }
+
+    getClothing(chosen_color) {
+
+        if (chosen_color) {
+            this.setState({
+                colour: chosen_color
+            })
+        }
+
+        fetch("/api/featured-collection?colour="+chosen_color)
             .then((response) => response.json())
             .then((data) => {
                this.setState({
                    collection: data[0].collection,
                    colour: data[0].colour,
                });
+               console.log('in fetch');
                data.forEach((item) => {
                    this.setState({
                        ...(item.clothing_type === 'Sweatshirt') && {sweatshirt: item},
@@ -37,8 +57,27 @@ export default class HomePage extends Component {
                        ...(item.clothing_type === 'T-Shirt') && {t_shirt: item}
                    })
                });
-               console.log(this.state);
             });
+    }
+
+    colourChoice() {
+        let colours = this.state.color_choices;
+        let html_array = [];
+
+        colours.forEach((colour) => {
+            html_array.push(<FormControlLabel value={colour.name} control={<Radio onChange={(e) => this.getClothing(colour.name)}
+                style={{
+                    color: colour.name,
+                    backgroundColor: colour.name,
+                    outline: '1px solid black',
+                    width: '30px',
+                    height: '30px',
+                    marginLeft: '30px',
+                    marginTop: '10px'}}
+            />} label="" />);
+        });
+
+        return html_array
     }
 
     render() {
@@ -129,7 +168,13 @@ export default class HomePage extends Component {
                                         <img className={"home-featured-preview-images"} src={this.state.hoodie_v2.image}/>
                                     </Grid>
                                     <b className={"home-featured-main-colours"}>Colours</b>
-                                    {/* TODO: Radio buttons for choosing colours */}
+                                    <div>
+                                        <FormControl component="fieldset">
+                                                <RadioGroup row aria-label="colours" name="radio-buttons-group">
+                                                {this.colourChoice()}
+                                            </RadioGroup>
+                                        </FormControl>
+                                    </div>
                                 </Grid>
                             </div>
                             {/* Right side - description */}
@@ -137,7 +182,8 @@ export default class HomePage extends Component {
                                 <p className={"home-featured-collection"}>{this.state.collection}</p>
                                 <p className={"home-featured-header"}>{this.state.hoodie_v1.header}</p>
                                 <p className={"home-featured-description"}>{this.state.hoodie_v1.description}</p>
-                                <p className={"home-featured-features"}> ] 50% Cotton 50% Polyester<br />
+                                <p className={"home-featured-features"}>
+                                    ] 50% Cotton 50% Polyester<br />
                                     ] Medium-heavy fabric<br />
                                     ] Classic fit<br />
                                     ] Tear away label<br />
@@ -145,6 +191,23 @@ export default class HomePage extends Component {
                                 </p>
                             </div>
                         </Grid>
+                        {/* Description part of everything :) */}
+                        <div className={"home-description-container"}>
+                            <Grid container direction="row" justify="center" alignItems="center">
+                                <img className={"home-description-image"} src={"/static/images/branding/TILTED_COLORS_Cover.png"}/>
+                                <div className={"home-description-text-container"}>
+                                    <Grid container direction="column">
+                                        <p className={"home-featured-collection"}>ERNOID</p>
+                                        <p className={"home-description-slogan"}>YOUR STYLE<br/>
+                                        YOUR CHOICE</p>
+                                        <p className={"home-description-textbox"}>The brand ''ERNOID'' is all about expanding your choice<br/>
+                                        to find the style that suites you. Creating simple and<br/>
+                                        timeless clothing designs, makes them flexible to<br/>
+                                        combine with variety of styles.</p>
+                                    </Grid>
+                                </div>
+                            </Grid>
+                        </div>
                     </div>
                 </div>
             </Grid>
