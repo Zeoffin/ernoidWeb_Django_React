@@ -79,6 +79,19 @@ WSGI_APPLICATION = 'ernoidWeb.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+''''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd643dft4eo088',
+        'HOST': 'ec2-54-228-99-58.eu-west-1.compute.amazonaws.com',
+        'PORT': 5432,
+        'USER': 'xcjxytjmgschcp',
+        'PASSWORD': '5b2b7627f4940f444596e9eb0a893ece1f81546a13ac4445166f44146b0f9f2f'
+    }
+}
+'''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -86,6 +99,8 @@ DATABASES = {
     }
 }
 
+import dj_database_url
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

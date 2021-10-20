@@ -2,6 +2,7 @@ django
 gunicorn
 django-heroku
 requests
+dj_database_url
 djangorestframework
 markdown
 django-filter
