@@ -23,7 +23,6 @@ export default class Collection extends Component {
                     items: data.items
                 })
         });
-        console.log(this.state);
     }
 
     setupCollectionItemGrid() {

@@ -23,7 +23,7 @@ export default class App extends Component {
                         <Route exact path={"/"} component={HomePage}/>
                         <Route path={"/all-collections"} component={Collections}/>
                         <Route path={"/collection/:collectionName"} component={Collection}/>
-                        <Route path={"/clothes"} component={Clothes}/>
+                        <Route path={"/clothes/:clothingType"} component={Clothes}/>
                     </Switch>
                 </Router>
                 <Footer/>

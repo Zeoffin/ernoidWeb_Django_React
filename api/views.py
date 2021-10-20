@@ -21,6 +21,33 @@ class CollectionView(generics.ListAPIView):
     queryset = Collection.objects.all()
     serializer_class = CollectionSerializer
 
+"""
+Returns items of all clothing items of selected type. However, only those items who are the same
+colour as the default colour of the collection they belong will be returned.
+"""
+class GetOneType(APIView):
+    serializer_class = ClothingSerializer
+
+    def get(self, request):
+
+        response = []
+
+        item_type = request.GET.get('item_type').title()
+        all_items_by_type = Clothing.objects.filter(type__name=item_type)
+
+        all_collection_colors = Collection.objects.all().values('default_colour')
+
+        # Only those items who are the same colour as the default collection that they are part of
+        for item in all_items_by_type:
+            if item.colour.hex_value == item.collection.default_colour:
+                response.append({
+                    'collection': item.collection.name,
+                    'price': item.price,
+                    'preview_image': '/media/' + item.preview_image.name
+                })
+
+        return Response(response)
+
 class GetAllCollectionItems(APIView):
     serializer_class = ClothingSerializer
 

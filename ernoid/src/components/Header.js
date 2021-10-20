@@ -68,12 +68,10 @@ export default function Header() {
                                            style={pathname==="/clothes" ? {color: 'white'} : {color: '#828282'}}>CLOTHES</Dropdown.Toggle>
 
                           <Dropdown.Menu className={"header-dropdown-menu"}>
-                            <Dropdown.Item className={"header-dropdown-item"} href="clothes">ALL</Dropdown.Item>
-                            <Dropdown.Item className={"header-dropdown-item"} href="#/action-1">T-SHIRT</Dropdown.Item>
-                            <Dropdown.Item className={"header-dropdown-item"} href="#/action-2">SWEATSHIRT</Dropdown.Item>
-                            <Dropdown.Item className={"header-dropdown-item"} href="#/action-3">HOODIE</Dropdown.Item>
-                            <Dropdown.Item className={"header-dropdown-item"} href="#/action-4">DRESS</Dropdown.Item>
-                            <Dropdown.Item className={"header-dropdown-item"} href="#/action-5">HAT</Dropdown.Item>
+                            <Dropdown.Item className={"header-dropdown-item"} href="../clothes/t-shirt">T-SHIRT</Dropdown.Item>
+                            <Dropdown.Item className={"header-dropdown-item"} href="../clothes/sweatshirt">SWEATSHIRT</Dropdown.Item>
+                            <Dropdown.Item className={"header-dropdown-item"} href="../clothes/hoodie">HOODIE</Dropdown.Item>
+                            <Dropdown.Item className={"header-dropdown-item"} href="../clothes/dress">DRESS</Dropdown.Item>
                           </Dropdown.Menu>
                         </Dropdown>
                     </Grid>

@@ -5,5 +5,6 @@ urlpatterns = [
     path('', main),
     path('all-collections', main),
     path('clothes', main),
-    path('collection/<str:collectionName>', main)
+    path('collection/<str:collectionName>', main),
+    path('clothes/<str:clothingType>', main),
 ]
