@@ -3,6 +3,7 @@ from .views import main
 
 urlpatterns = [
     path('', main),
-    path('collections', main),
-    path('clothes', main)
+    path('all-collections', main),
+    path('clothes', main),
+    path('collection/<str:collectionName>', main)
 ]

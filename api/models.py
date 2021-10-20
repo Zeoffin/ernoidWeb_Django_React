@@ -5,6 +5,7 @@ from django.db import models
 
 class Collection(models.Model):
     name = models.CharField(max_length=30, default="", unique=True)
+    collection_logo = models.ImageField(default='')
     description = models.CharField(max_length=200, default="")
     released = models.BooleanField(null=False, default=False)
 

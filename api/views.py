@@ -21,6 +21,16 @@ class CollectionView(generics.ListAPIView):
     queryset = Collection.objects.all()
     serializer_class = CollectionSerializer
 
+# TODO: Kolekcijā vajaga jau izrādīt visas drēbes, nevis tikai vienu krāsu. erno get your shit together mate
+class GetAllCollectionItems(APIView):
+    serializer_class = ClothingSerializer
+
+    def get(self, request):
+
+        collection = 'censored' # TODO: Dynamic
+        colour = 'red'
+        response = Clothing.objects.filter(collection__name=collection, colour__name='red')
+
 # View for getting data for featured collection
 # TODO: The featured collection is hardcoded- best way would be to randomize it OR let the owner choose it!
 class GetFeaturedCollection(APIView):

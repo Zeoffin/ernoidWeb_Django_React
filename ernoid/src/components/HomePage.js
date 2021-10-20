@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
-import { Grid, FormControlLabel, Radio, RadioGroup, FormControl, FormLabel } from '@material-ui/core';
-import data from "bootstrap/js/src/dom/data";
+import { Grid, FormControlLabel, Radio, RadioGroup, FormControl } from '@material-ui/core';
 
 export default class HomePage extends Component {
     constructor(props) {
@@ -47,7 +46,6 @@ export default class HomePage extends Component {
                    collection: data[0].collection,
                    colour: data[0].colour,
                });
-               console.log('in fetch');
                data.forEach((item) => {
                    this.setState({
                        ...(item.clothing_type === 'Sweatshirt') && {sweatshirt: item},

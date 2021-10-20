@@ -3,6 +3,7 @@ import { render } from "react-dom";
 import HomePage from "./HomePage";
 import Header from "./Header";
 import Collections from "./Collections";
+import Collection from "./Collection"
 import Clothes from "./Clothes";
 import Grid from "@material-ui/core/Grid";
 import Footer from "./Footer";
@@ -20,7 +21,8 @@ export default class App extends Component {
                 <Router>
                     <Switch>
                         <Route exact path={"/"} component={HomePage}/>
-                        <Route path={"/collections"} component={Collections}/>
+                        <Route path={"/all-collections"} component={Collections}/>
+                        <Route path={"/collection/:collectionName"} component={Collection}/>
                         <Route path={"/clothes"} component={Clothes}/>
                     </Switch>
                 </Router>

@@ -19,4 +19,4 @@ class ColourSerializer(serializers.ModelSerializer):
 class CollectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Collection
-        fields = ('id', 'name' ,'description', 'released')
+        fields = ('id', 'name', 'collection_logo', 'description', 'released')
