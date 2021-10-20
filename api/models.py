@@ -8,20 +8,21 @@ class Collection(models.Model):
     collection_logo = models.ImageField(default='')
     description = models.CharField(max_length=200, default="")
     released = models.BooleanField(null=False, default=False)
+    default_colour = models.CharField(max_length=10, default="#FFFFFF", unique=False, help_text="Colour in hex e.g. #FFFFFF")
 
     def __str__(self):
         return self.name.capitalize()
 
 class ClothingType(models.Model):
-    name = models.CharField(max_length=30, default="", unique=True)
+    name = models.CharField(max_length=30, default="")
     version = models.IntegerField(default=1)
 
     def __str__(self):
-        return self.name.capitalize()
+        return self.name.capitalize() + ' (v' + str(self.version) + ')'
 
 class Colour(models.Model):
     name = models.CharField(max_length=30, default="", unique=True)
-    hex_value = models.CharField(max_length=10, default="#FFFFFF", unique=False)
+    hex_value = models.CharField(max_length=10, default="#FFFFFF", unique=False, help_text="Colour in hex e.g. #FFFFFF")
 
     def __str__(self):
         return self.name

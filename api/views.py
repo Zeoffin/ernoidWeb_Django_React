@@ -21,15 +21,36 @@ class CollectionView(generics.ListAPIView):
     queryset = Collection.objects.all()
     serializer_class = CollectionSerializer
 
-# TODO: Kolekcijā vajaga jau izrādīt visas drēbes, nevis tikai vienu krāsu. erno get your shit together mate
 class GetAllCollectionItems(APIView):
     serializer_class = ClothingSerializer
 
     def get(self, request):
 
-        collection = 'censored' # TODO: Dynamic
-        colour = 'red'
-        response = Clothing.objects.filter(collection__name=collection, colour__name='red')
+        response = {
+            'collection': None,
+            'default_colour': None,
+            'items': []
+        }
+
+        # Parse the string so its in the format as 'name' field for collection object
+        collection = request.GET.get('collection')
+        collection = ' '.join(collection.split('-')).title()
+
+        collection_response = Collection.objects.get(name=collection)
+
+        data = Clothing.objects.filter(collection__name=collection, colour__hex_value=collection_response.default_colour)
+
+        response['collection'] = collection
+        response['default_colour'] = data[0].colour.hex_value
+
+        for item in data:
+            response['items'].append({
+                'type': item.type.name,
+                'preview_image': '/media/' + item.preview_image.name,
+                'price': item.price
+            })
+
+        return Response(response)
 
 # View for getting data for featured collection
 # TODO: The featured collection is hardcoded- best way would be to randomize it OR let the owner choose it!
@@ -40,7 +61,7 @@ class GetFeaturedCollection(APIView):
 
         response = []
         colour = request.GET.get('colour')
-        data = Clothing.objects.filter(collection__name='censored', colour__name=colour) # TODO: Change CENSORED to a better way for display
+        data = Clothing.objects.filter(collection__name='Censored', colour__name=colour) # TODO: Change CENSORED to a better way for display
 
         for item in data:
             response.append(
@@ -51,6 +72,7 @@ class GetFeaturedCollection(APIView):
                     'material': item.material,
                     'image': '/media/' + item.preview_image.name,
                     'clothing_type': item.type.name,
+                    'type_version': item.type.version,
                     'description': item.description,
                     'header': item.header,
                     'price': item.price
