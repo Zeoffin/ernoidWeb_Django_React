@@ -50,8 +50,8 @@ export default class HomePage extends Component {
                    this.setState({
                        ...(item.clothing_type === 'Sweatshirt') && {sweatshirt: item},
                        ...(item.clothing_type === 'Beanie') && {beanie: item},
-                       ...(item.clothing_type === 'Hoodie') && {hoodie_v1: item},
-                       ...(item.clothing_type === 'Hoodie_V2') && {hoodie_v2: item},
+                       ...(item.clothing_type === 'Hoodie' && item.type_version === 1) && {hoodie_v1: item},
+                       ...(item.clothing_type === 'Hoodie' && item.type_version === 2) && {hoodie_v2: item},
                        ...(item.clothing_type === 'T-Shirt') && {t_shirt: item}
                    })
                });

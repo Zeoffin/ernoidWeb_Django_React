@@ -12,7 +12,7 @@ export default function Header() {
 
     let pathname = window.location.pathname.toString();
 
-    const getCollections = () => {      // TODO: Dynamic collection
+    const getCollections = () => {
         fetch('/api/collections')
             .then((response) => response.json())
             .then((data) => {
@@ -20,7 +20,9 @@ export default function Header() {
             });
     }
 
-    function collectionDropdown () {    // TODO: Dynamic collection
+    // TODO: Dynamic collection - this function should be made correctly as a component or smt else so collections
+    //  are dynamically added to the header
+    function collectionDropdown () {
         getCollections();
         let return_array = []
         collections.forEach((collection_data) => {
@@ -30,7 +32,7 @@ export default function Header() {
            let collection_name = collection_data.name.toUpperCase();
 
            return_array.push(
-               <Dropdown.Item className={"header-dropdown-item"} href={"collection/"+collection_link_name}>{collection_name}</Dropdown.Item>
+               <Dropdown.Item className={"header-dropdown-item"} href={"../collection/"+collection_link_name}>{collection_name}</Dropdown.Item>
            );
 
         });
@@ -46,13 +48,15 @@ export default function Header() {
 
                 <div className={"header-navigation"}>
                     <Grid container direction="row" justify="center" alignItems="center">
-                        <Button className={"header-dropdown-home"} href={"/"} style={pathname==="/" ? {color: 'white'} : {color: '#828282'}}>HOME</Button>
+                        <Button className={"header-dropdown-home"} href={"/"}
+                                style={pathname==="/" ? {color: 'white'} : {color: '#828282'}}>HOME</Button>
 
                         <Dropdown>
-                          <Dropdown.Toggle className={"header-dropdown-toggle"} style={pathname==="/all-collections" ? {color: 'white'} : {color: '#828282'}}>COLLECTIONS</Dropdown.Toggle>
+                          <Dropdown.Toggle className={"header-dropdown-toggle"}
+                                           style={pathname==="/all-collections" || pathname.includes("/collection/") ? {color: 'white'} : {color: '#828282'}}>COLLECTIONS</Dropdown.Toggle>
                             {/* TODO: Dynamically add collections to the menu page */}
                             <Dropdown.Menu className={"header-dropdown-menu"}>
-                                <Dropdown.Item className={"header-dropdown-item"} href="all-collections">ALL COLLECTIONS</Dropdown.Item>
+                                <Dropdown.Item className={"header-dropdown-item"} href="../all-collections">ALL COLLECTIONS</Dropdown.Item>
                                 <Dropdown.Item className={"header-dropdown-item"} href="../collection/classic">CLASSIC</Dropdown.Item>
                                 <Dropdown.Item className={"header-dropdown-item"} href="../collection/tilted-colors">TILTED COLORS</Dropdown.Item>
                                 <Dropdown.Item className={"header-dropdown-item"} href="../collection/censored">CENSORED</Dropdown.Item>
@@ -60,7 +64,8 @@ export default function Header() {
                         </Dropdown>
 
                         <Dropdown>
-                          <Dropdown.Toggle className={"header-dropdown-toggle"} style={pathname==="/clothes" ? {color: 'white'} : {color: '#828282'}}>CLOTHES</Dropdown.Toggle>
+                          <Dropdown.Toggle className={"header-dropdown-toggle"}
+                                           style={pathname==="/clothes" ? {color: 'white'} : {color: '#828282'}}>CLOTHES</Dropdown.Toggle>
 
                           <Dropdown.Menu className={"header-dropdown-menu"}>
                             <Dropdown.Item className={"header-dropdown-item"} href="clothes">ALL</Dropdown.Item>

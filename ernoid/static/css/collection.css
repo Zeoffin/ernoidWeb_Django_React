@@ -1,0 +1,32 @@
+.collection-main {
+    position: relative;
+    background-color: white;
+    margin-bottom: 0;
+    padding-bottom: 5%;
+    padding-top: 3%;
+    width: 100%;
+}
+
+.collection-main-name {
+    font-size: 30px;
+    padding-bottom: 400px;
+}
+
+.collection-main-item {
+    margin-right: 100px;
+}
+
+.collection-main-item p, b {
+    font-size: 20px;
+}
+
+.collection-text {
+    padding-top: 2%;
+    margin-bottom: 4%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: .2rem;
+    font-size: 40px;
+}

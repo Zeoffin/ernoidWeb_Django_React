@@ -21,7 +21,6 @@ export default class Collections extends Component {
     }
 
     setupCollection() {
-        console.log('Setup collection');
         let return_array = []
         this.state.collections.forEach((collection) => {
 
