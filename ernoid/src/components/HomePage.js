@@ -13,22 +13,11 @@ export default class HomePage extends Component {
             beanie: {},
             hoodie_v1: {},
             hoodie_v2: {},
-            colour: 'Black',
-            color_choices: [],
+            colour: 'Red',        // TODO: Change default 'Black' to red ?
+            color_choices: [{'name': 'Red'}, {'name': 'White'}, {'name': 'Black'}], // TODO: Only these 3 colours available for the collection. Refactor this somehow? Add available colours to collection model?
             description: null,
         };
-        this.getClothing('Black');  // Set default selected colour to black
-        this.getColours();
-    }
-
-    getColours() {
-        fetch("/api/colours")
-            .then((response) => response.json())
-            .then((data) => {
-               this.setState({
-                 color_choices: data
-               });
-            });
+        this.getClothing('Red');  // Set default selected colour to black
     }
 
     getClothing(chosen_color) {
