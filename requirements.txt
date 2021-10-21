@@ -1,9 +1,13 @@
-django
+django~=3.2.8
 gunicorn
 django-heroku
 requests
 dj_database_url
-djangorestframework
+djangorestframework~=3.12.4
 markdown
+django-storages
+boto3
 django-filter
 Pillow
+pip~=21.1.2
+setuptools~=57.0.0
