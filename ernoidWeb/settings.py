@@ -163,13 +163,12 @@ if ON_HEROKU:
     # STATIC_LOCATION = 'static'
     AWS_LOCATION = 'static'
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
-    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
     # s3 public media settings
     PUBLIC_MEDIA_LOCATION = 'media'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
     DEFAULT_FILE_STORAGE = 'ernoidWeb.storage_backends.PublicMediaStorage'
-
 else:
     # Local storage
     STATIC_URL = '/static/'
@@ -186,4 +185,4 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Configure Django App for Heroku.
-django_heroku.settings(locals())
+django_heroku.settings(locals(), staticfiles=False)
