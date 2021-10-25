@@ -27,4 +27,4 @@ urlpatterns = [
     path("favicon.ico",
          RedirectView.as_view(url=staticfiles_storage.url("images/assets/favicon.ico"))), # Replace favicon
     # path('api-auth/', include('rest_framework.urls'))
-] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)  # Adds the media to the url
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # Adds the media to the url
