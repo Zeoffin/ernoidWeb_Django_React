@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path, include
 from django.conf import settings
 from django.contrib.staticfiles.storage import staticfiles_storage
@@ -25,6 +26,6 @@ urlpatterns = [
     path('', include('ernoid.urls')),
     path('api/', include('api.urls')),
     path("favicon.ico",
-         RedirectView.as_view(url=staticfiles_storage.url("images/assets/favicon.ico"))), # Replace favicon
+         RedirectView.as_view(url=staticfiles_storage.url("images/assets/favicon.ico"))),  # Replace favicon
     # path('api-auth/', include('rest_framework.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # Adds the media to the url

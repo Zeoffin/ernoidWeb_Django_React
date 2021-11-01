@@ -18,7 +18,7 @@ export default function Footer() {
                     <b>FOLLOW</b>
                         <a href="https://instagram.com/ernoid?utm_medium=copy_link" style={{textDecoration: 'none'}}>
                             <Grid container direction="row" alignItems="center">
-                                <img className={"footer-pic-limit"} style={{maxHeight: '30px'}} src={"../static/images/assets/insta_white.png"}/>
+                                <img className={"footer-pic-limit"} style={{maxHeight: '30px'}} src={"static/images/assets/insta_white.png"}/>
                                 <p>ERNOID</p>
                             </Grid>
                         </a>
@@ -29,7 +29,7 @@ export default function Footer() {
                     <b>LEGAL</b>
                     <p>Terms</p>
                     <p>Privacy</p>
-                    <img className={"footer-pic-limit"} style={{maxHeight: '30px', marginTop: '40px'}} src={"../static/images/assets/payment_methods.png"}/>
+                    <img className={"footer-pic-limit"} style={{maxHeight: '30px', marginTop: '40px'}} src={"static/images/assets/payment_methods.png"}/>
                 </Grid>
             </div>
         </Grid>
