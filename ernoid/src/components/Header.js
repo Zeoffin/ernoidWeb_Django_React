@@ -9,6 +9,7 @@ import Dropdown from "react-bootstrap/cjs/Dropdown";
 
 export default function Header() {
     const [collections, setCollections] = useState([])
+    const [itemsInCart, setitemsInCart] = useState([])
 
     let pathname = window.location.pathname.toString();
 
@@ -44,7 +45,7 @@ export default function Header() {
         <div className={"header-style"}>
             <Grid container direction="row" justify="center" alignItems="center">
 
-                <img className={"header-logo"} src={"static/images/branding/ERNOID_Typography_White.png"}/>
+                <img className={"header-logo"} src={"/static/images/branding/ERNOID_Typography_White.png"}/>
 
                 <div className={"header-navigation"}>
                     <Grid container direction="row" justify="center" alignItems="center">
@@ -65,19 +66,26 @@ export default function Header() {
 
                         <Dropdown>
                           <Dropdown.Toggle className={"header-dropdown-toggle"}
-                                           style={pathname==="/clothes" ? {color: 'white'} : {color: '#828282'}}>CLOTHES</Dropdown.Toggle>
+                                           style={pathname.includes("/clothes/") ? {color: 'white'} : {color: '#828282'}}>CLOTHES</Dropdown.Toggle>
 
+                            {/* TODO: dynamic arī vajadzētu :) */}
                           <Dropdown.Menu className={"header-dropdown-menu"}>
                             <Dropdown.Item className={"header-dropdown-item"} href="../clothes/t-shirt">T-SHIRT</Dropdown.Item>
                             <Dropdown.Item className={"header-dropdown-item"} href="../clothes/sweatshirt">SWEATSHIRT</Dropdown.Item>
                             <Dropdown.Item className={"header-dropdown-item"} href="../clothes/hoodie">HOODIE</Dropdown.Item>
                             <Dropdown.Item className={"header-dropdown-item"} href="../clothes/dress">DRESS</Dropdown.Item>
+                            <Dropdown.Item className={"header-dropdown-item"} href="../clothes/beanie">BEANIE</Dropdown.Item>
                           </Dropdown.Menu>
                         </Dropdown>
+
+                        <p className={"header-separator"}>|</p>
+                        <a className={"header-cart"} href={"/shopping-cart"}>
+                                <img className={"header-cart-image"} src={"/static/images/assets/cart_white.png"} />
+                        </a>
+                        <p className={"header-separator"}>{itemsInCart}</p>
+
                     </Grid>
                 </div>
-
-                {/* TODO: Cart checkout */}
 
             </Grid>
         </div>

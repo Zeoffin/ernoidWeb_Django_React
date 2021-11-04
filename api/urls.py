@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import ClothingView, ClothingtypeView, CollectionView, ColourView,\
-    GetFeaturedCollection, GetAllCollectionItems, GetOneType
+    GetFeaturedCollection, GetAllCollectionItems, GetOneType, GetSelectedItem
 
 urlpatterns = [
     path('clothing', ClothingView.as_view()),
@@ -9,5 +9,6 @@ urlpatterns = [
     path('colours', ColourView.as_view()),
     path('featured-collection', GetFeaturedCollection.as_view()),
     path('collection-items', GetAllCollectionItems.as_view()),
-    path('type-items', GetOneType.as_view())
+    path('type-items', GetOneType.as_view()),
+    path('selected-item', GetSelectedItem().as_view())
 ]

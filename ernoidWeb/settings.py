@@ -25,8 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
-SECRET_KEY = 'django-insecure-!u*_sg%84k55jmj=hx7okel@sv7$smjsz+omz+4k-p@&g)%a9@'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # DEBUG
 if ON_HEROKU:
@@ -88,19 +87,6 @@ WSGI_APPLICATION = 'ernoidWeb.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-''''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd643dft4eo088',
-        'HOST': 'ec2-54-228-99-58.eu-west-1.compute.amazonaws.com',
-        'PORT': 5432,
-        'USER': 'xcjxytjmgschcp',
-        'PASSWORD': '5b2b7627f4940f444596e9eb0a893ece1f81546a13ac4445166f44146b0f9f2f'
-    }
-}
-'''
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -143,42 +129,30 @@ USE_L10N = True
 
 USE_TZ = True
 
-# if ON_HEROKU:
-# AWS settings
-# AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
-AWS_ACCESS_KEY_ID = 'AKIA24DAV5AKUS3BUU6M'
-# AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
-AWS_SECRET_ACCESS_KEY = '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'
-# AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
-AWS_STORAGE_BUCKET_NAME = 'ernoid-web-bucket'
-AWS_DEFAULT_ACL = 'public-read'
-AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+if ON_HEROKU:
+    # AWS settings
+    AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+    AWS_DEFAULT_ACL = 'public-read'
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 
-# s3 static settings
-# AWS_LOCATION = 'static'
-# STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
-# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    # s3 public media settings
+    PUBLIC_MEDIA_LOCATION = 'media'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
+    DEFAULT_FILE_STORAGE = 'ernoidWeb.storage_backends.PublicMediaStorage'
 
-# Whitenoise static serving
+else:
+    # Local storage
+    # STATIC_URL = '/staticfiles/'
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Whitenoise static files configuration
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_URL = '/static/'
-
-# s3 public media settings
-PUBLIC_MEDIA_LOCATION = 'media'
-MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
-DEFAULT_FILE_STORAGE = 'ernoidWeb.storage_backends.PublicMediaStorage'
-
-# else:
-#     # Local storage
-#     STATIC_URL = '/staticfiles/'
-#     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-#     MEDIA_URL = '/media/'
-#     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-# Whitenoise stuff
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'ernoid/static')]
 
 
@@ -186,6 +160,11 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'ernoid/static')]
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Configure STRIPE API
+STRIPE_PUBLIC_KEY = ""
+STRIPE_SECRET_KEY = ""
+STRIPE_WEBHOOK_SECRET = ""
 
 # Configure Django App for Heroku.
 django_heroku.settings(locals(), staticfiles=False)

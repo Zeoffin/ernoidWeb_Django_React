@@ -26,11 +26,12 @@ class CollectionView(generics.ListAPIView):
     serializer_class = CollectionSerializer
 
 
-"""
-Returns items of all clothing items of selected type. However, only those items who are the same
-colour as the default colour of the collection they belong will be returned.
-"""
 class GetOneType(APIView):
+    """
+    Returns items of all clothing items of selected type. Used for CLOTHES page. However, only those items who
+    are the same colour as the default colour of the collection they belong will be returned.
+    """
+
     serializer_class = ClothingSerializer
 
     def get(self, request):
@@ -46,15 +47,20 @@ class GetOneType(APIView):
         for item in all_items_by_type:
             if item.colour.hex_value == item.collection.default_colour:
                 response.append({
+                    'item_id': item.id,
                     'collection': item.collection.name,
                     'price': item.price,
-                    'preview_image': '/media/' + item.preview_image.name
+                    'preview_image': item.preview_image.url
                 })
 
         return Response(response)
 
 
 class GetAllCollectionItems(APIView):
+    """
+    Returns all items of selected collection in the collections default color.
+    """
+
     serializer_class = ClothingSerializer
 
     def get(self, request):
@@ -78,33 +84,37 @@ class GetAllCollectionItems(APIView):
 
         for item in data:
             response['items'].append({
+                'item_id': item.id,
                 'type': item.type.name,
-                'preview_image': '/media/' + item.preview_image.name,
+                'preview_image': item.preview_image.url,
                 'price': item.price
             })
 
         return Response(response)
 
 
-# View for getting data for featured collection
 # TODO: The featured collection is hardcoded- best way would be to randomize it OR let the owner choose it!
 class GetFeaturedCollection(APIView):
+    """
+    Return featured collection to the home page.
+    """
+
     serializer_class = ClothingSerializer
 
     def get(self, request):
 
         response = []
         colour = request.GET.get('colour')
-        data = Clothing.objects.filter(collection__name='Censored', colour__name=colour) # TODO: Change CENSORED to a better way for display
+        data = Clothing.objects.filter(collection__name='Censored', colour__name=colour)     # TODO: CENSORED hardcoded
 
         for item in data:
             response.append(
                 {
-                    'clothing_id': item.id,
+                    'item_id': item.id,
                     'colour': item.colour.name,
                     'collection': item.collection.name.capitalize(),
                     'material': item.material,
-                    'image': '/media/' + item.preview_image.name,
+                    'image': item.preview_image.url,
                     'clothing_type': item.type.name,
                     'type_version': item.type.version,
                     'description': item.description,
@@ -112,5 +122,41 @@ class GetFeaturedCollection(APIView):
                     'price': item.price
                 }
             )
+
+        return Response(response)
+
+
+class GetSelectedItem(APIView):
+    """
+    Returns selected clothing item and the colours it is available in.
+    """
+
+    serializer_class = ClothingSerializer
+
+    def get(self, request):
+
+        response = {'colors': []}
+        item_id = request.GET.get('item_id')
+
+        # Get selected item
+        data = Clothing.objects.get(id=item_id)
+
+        # Get all colours for this type of item
+        all_items = Clothing.objects.filter(collection=data.collection, type=data.type, type__version=data.type.version)
+        for item in all_items:
+            response['colors'].append({
+                'item_id': item.id,
+                'color': item.colour.hex_value
+            })
+
+        response['selected_item'] = {
+            'id': data.id,
+            'colour': data.colour.name,
+            'colour_hex': data.colour.hex_value,
+            'preview_image': data.preview_image.url,
+            'collection': data.collection.name,
+            'clothing_type': data.type.name,
+            'price': data.price
+        }
 
         return Response(response)

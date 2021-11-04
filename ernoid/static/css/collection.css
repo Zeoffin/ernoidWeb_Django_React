@@ -7,6 +7,15 @@
     width: 100%;
 }
 
+.collection-main a{
+    text-decoration: none;
+    color: black;
+}
+
+.collection-main a:hover{
+    color: gray;
+}
+
 .collection-main-name {
     font-size: 30px;
     padding-bottom: 400px;

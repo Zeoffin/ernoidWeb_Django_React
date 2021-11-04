@@ -29,20 +29,22 @@ export default class Collection extends Component {
         let return_array = []
         this.state.items.forEach((item) => {
             return_array.push(
-                <div className={"collection-main-item"}>
-                    <Grid container direction={"row"} alignItems="center">
-                        <div>
-                            <img className={"home-featured-preview-images"} src={item.preview_image}/>
-                        </div>
-                        <div>
-                            <Grid container direction={"column"} className={"home-featured-preview-description"}>
-                                <b className={"home-featured-preview-description-collection"}>{this.state.collection}</b>
-                                <p className={"home-featured-preview-description-type"}>{item.type}</p>
-                                <p className={"home-featured-preview-description-type"}>{item.price} $</p>
-                            </Grid>
-                        </div>
-                    </Grid>
-                </div>
+                <a href={"/item-selection/"+item.item_id}>
+                    <div className={"collection-main-item"}>
+                        <Grid container direction={"row"} alignItems="center">
+                            <div>
+                                <img className={"home-featured-preview-images"} src={item.preview_image}/>
+                            </div>
+                            <div>
+                                <Grid container direction={"column"} className={"home-featured-preview-description"}>
+                                    <b className={"home-featured-preview-description-collection"}>{this.state.collection}</b>
+                                    <p className={"home-featured-preview-description-type"}>{item.type}</p>
+                                    <p className={"home-featured-preview-description-type"}>{item.price} $</p>
+                                </Grid>
+                            </div>
+                        </Grid>
+                    </div>
+                </a>
             )
         });
         return return_array

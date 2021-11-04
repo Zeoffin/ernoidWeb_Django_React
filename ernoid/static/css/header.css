@@ -52,6 +52,23 @@ Override bootstrap dropdown attributes
     margin-left: 50px !important;
 }
 
+.header-separator {
+    padding-left: 50px;
+    margin-top: 17px !important;
+    text-align: center;
+}
+
+.header-cart {
+    background-color: black !important;
+    border-color: black !important;
+    margin-left: 10px;
+}
+
+.header-cart-image {
+    width: 25px;
+    height: 25px;
+}
+
 .header-dropdown-home {
     background-color: black !important;
     border-color: black !important;

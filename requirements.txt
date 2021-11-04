@@ -11,3 +11,5 @@ django-filter
 Pillow
 pip~=21.1.2
 setuptools~=57.0.0
+stripe~=2.61.0
+whitenoise
