@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Grid from "@material-ui/core/Grid";
+import { Link } from 'react-router-dom';
 
 export default class Clothes extends Component {
     constructor(props) {
@@ -9,6 +10,17 @@ export default class Clothes extends Component {
             items: []
         }
         this.getClothes();
+    }
+
+    updateClothingType() {
+        this.clothingType = this.props.match.params.clothingType;
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.location !== prevProps.location) {
+            this.updateClothingType();
+            this.getClothes();
+        }
     }
 
     getClothes() {
@@ -25,7 +37,7 @@ export default class Clothes extends Component {
         let return_array = []
         this.state.items.forEach((item) => {
             return_array.push(
-                <a href={"/item-selection/"+item.item_id}>
+                <Link to={"/item-selection/"+item.item_id}>
                     <div className={"collection-main-item"}>
                         <Grid container direction={"row"} alignItems="center">
                             <div>
@@ -39,7 +51,7 @@ export default class Clothes extends Component {
                             </div>
                         </Grid>
                     </div>
-                </a>
+                </Link>
             )
         });
         return return_array

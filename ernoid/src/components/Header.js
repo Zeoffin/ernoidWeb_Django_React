@@ -1,17 +1,29 @@
-import React, {Component, useState} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import { Grid } from '@material-ui/core';
 import Button from "react-bootstrap/cjs/Button"
 import Dropdown from "react-bootstrap/cjs/Dropdown";
+import store from "../redux/store";
+import { Link, useLocation } from "react-router-dom";
 
 /**
  * The header file is responsible for the header bar and main navigation functionality.
  */
 
 export default function Header() {
-    const [collections, setCollections] = useState([])
-    const [itemsInCart, setitemsInCart] = useState([])
 
-    let pathname = window.location.pathname.toString();
+    let location = useLocation();
+
+    const [collections, setCollections] = useState([]);
+    const [count, setCount] = useState(store.getState().shop.itemsInCart);
+    const [pathname, setPathname] = useState(location.pathname);
+
+    useEffect(
+        () => {
+            setPathname(location.pathname); // Used for setting color of header location to white based on path
+        }
+    )
+
+    store.subscribe(() => setCount(store.getState().shop.itemsInCart));
 
     const getCollections = () => {
         fetch('/api/collections')
@@ -33,7 +45,7 @@ export default function Header() {
            let collection_name = collection_data.name.toUpperCase();
 
            return_array.push(
-               <Dropdown.Item className={"header-dropdown-item"} href={"../collection/"+collection_link_name}>{collection_name}</Dropdown.Item>
+               <Dropdown.Item className={"header-dropdown-item"} as={Link} to={"../collection/"+collection_link_name}>{collection_name}</Dropdown.Item>
            );
 
         });
@@ -49,18 +61,17 @@ export default function Header() {
 
                 <div className={"header-navigation"}>
                     <Grid container direction="row" justify="center" alignItems="center">
-                        <Button className={"header-dropdown-home"} href={"/"}
+                        <Button className={"header-dropdown-home"} as={Link} to={"/"}
                                 style={pathname==="/" ? {color: 'white'} : {color: '#828282'}}>HOME</Button>
-
                         <Dropdown>
                           <Dropdown.Toggle className={"header-dropdown-toggle"}
                                            style={pathname==="/all-collections" || pathname.includes("/collection/") ? {color: 'white'} : {color: '#828282'}}>COLLECTIONS</Dropdown.Toggle>
                             {/* TODO: Dynamically add collections to the menu page */}
                             <Dropdown.Menu className={"header-dropdown-menu"}>
-                                <Dropdown.Item className={"header-dropdown-item"} href="../all-collections">ALL COLLECTIONS</Dropdown.Item>
-                                <Dropdown.Item className={"header-dropdown-item"} href="../collection/classic">CLASSIC</Dropdown.Item>
-                                <Dropdown.Item className={"header-dropdown-item"} href="../collection/tilted-colors">TILTED COLORS</Dropdown.Item>
-                                <Dropdown.Item className={"header-dropdown-item"} href="../collection/censored">CENSORED</Dropdown.Item>
+                                    <Dropdown.Item className={"header-dropdown-item"} as={Link} to="../all-collections">ALL COLLECTIONS</Dropdown.Item>
+                                <Dropdown.Item className={"header-dropdown-item"} as={Link} to="../collection/classic">CLASSIC</Dropdown.Item>
+                                <Dropdown.Item className={"header-dropdown-item"} as={Link} to="../collection/tilted-colors">TILTED COLORS</Dropdown.Item>
+                                <Dropdown.Item className={"header-dropdown-item"} as={Link} to="../collection/censored">CENSORED</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
 
@@ -70,19 +81,19 @@ export default function Header() {
 
                             {/* TODO: dynamic arī vajadzētu :) */}
                           <Dropdown.Menu className={"header-dropdown-menu"}>
-                            <Dropdown.Item className={"header-dropdown-item"} href="../clothes/t-shirt">T-SHIRT</Dropdown.Item>
-                            <Dropdown.Item className={"header-dropdown-item"} href="../clothes/sweatshirt">SWEATSHIRT</Dropdown.Item>
-                            <Dropdown.Item className={"header-dropdown-item"} href="../clothes/hoodie">HOODIE</Dropdown.Item>
-                            <Dropdown.Item className={"header-dropdown-item"} href="../clothes/dress">DRESS</Dropdown.Item>
-                            <Dropdown.Item className={"header-dropdown-item"} href="../clothes/beanie">BEANIE</Dropdown.Item>
+                            <Dropdown.Item className={"header-dropdown-item"} as={Link} to="../clothes/t-shirt">T-SHIRT</Dropdown.Item>
+                            <Dropdown.Item className={"header-dropdown-item"} as={Link} to="../clothes/sweatshirt">SWEATSHIRT</Dropdown.Item>
+                            <Dropdown.Item className={"header-dropdown-item"} as={Link} to="../clothes/hoodie">HOODIE</Dropdown.Item>
+                            <Dropdown.Item className={"header-dropdown-item"} as={Link} to="../clothes/dress">DRESS</Dropdown.Item>
+                            <Dropdown.Item className={"header-dropdown-item"} as={Link} to="../clothes/beanie">BEANIE</Dropdown.Item>
                           </Dropdown.Menu>
                         </Dropdown>
 
                         <p className={"header-separator"}>|</p>
-                        <a className={"header-cart"} href={"/shopping-cart"}>
+                        <Link className={"header-cart"} to={"/shopping-cart"}>
                                 <img className={"header-cart-image"} src={"/static/images/assets/cart_white.png"} />
-                        </a>
-                        <p className={"header-separator"}>{itemsInCart}</p>
+                        </Link>
+                        <p className={"header-separator"}>{count}</p>
 
                     </Grid>
                 </div>

@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import Grid from "@material-ui/core/Grid";
+import { Link } from 'react-router-dom';
 
 export default class Collection extends Component {
     constructor(props) {
@@ -11,6 +12,17 @@ export default class Collection extends Component {
             items: []
         };
         this.getCollectionClothes();
+    }
+
+    updateCollectionName() {
+        this.collectionName = this.props.match.params.collectionName;
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.location !== prevProps.location) {
+            this.updateCollectionName();
+            this.getCollectionClothes();
+        }
     }
 
     getCollectionClothes() {
@@ -29,7 +41,7 @@ export default class Collection extends Component {
         let return_array = []
         this.state.items.forEach((item) => {
             return_array.push(
-                <a href={"/item-selection/"+item.item_id}>
+                <Link to={"/item-selection/"+item.item_id}>
                     <div className={"collection-main-item"}>
                         <Grid container direction={"row"} alignItems="center">
                             <div>
@@ -44,7 +56,7 @@ export default class Collection extends Component {
                             </div>
                         </Grid>
                     </div>
-                </a>
+                </Link>
             )
         });
         return return_array

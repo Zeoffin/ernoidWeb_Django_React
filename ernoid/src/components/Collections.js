@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Grid from "@material-ui/core/Grid";
+import {Link} from 'react-router-dom';
 
 export default class Collections extends Component {
     constructor(props) {
@@ -29,7 +30,7 @@ export default class Collections extends Component {
 
             // Return array for each collection
             return_array.push(
-                <a href={"collection/"+collection_name} className={"collection-link"}>
+                <Link to={"collection/"+collection_name} className={"collection-link"}>
                     <div className={"collection-container"}>
                         <Grid container direction={"column"} alignItems="center" justify="center">
                             <img className={"collection-logo"} src={collection.collection_logo}/>
@@ -37,7 +38,7 @@ export default class Collections extends Component {
                             <p className={"collections-description"}>{collection.description}</p>
                         </Grid>
                     </div>
-                </a>
+                </Link>
             )
         });
         return return_array

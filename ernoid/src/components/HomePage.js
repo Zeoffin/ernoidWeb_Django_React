@@ -2,34 +2,15 @@ import React, { Component } from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import { Grid, FormControlLabel, Radio, RadioGroup, FormControl } from '@material-ui/core';
-import styled from "@material-ui/core/styles/styled";
-import Button from "@material-ui/core/Button";
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {CustomButton} from "../customComponents";
+import { Link } from 'react-router-dom';
+import store from "../redux/store";
+import {addToCart} from "../redux/shopping/shopping-actions";
 
-const CustomButton = styled(Button)({
-    boxShadow: 'none',
-    textTransform: 'none',
-    fontSize: 25,
-    letterSpacing: '.1rem',
-    marginRight: '30px',
-    padding: '6px 30px',
-    border: '2px solid',
-    lineHeight: 1.5,
-    backgroundColor: 'white',
-    borderColor: 'black',
-    borderRadius: '30px',
-    '&:hover': {
-        backgroundColor: 'black',
-        color: 'white'
-    },
-    '&:active': {
-        boxShadow: 'none',
-        backgroundColor: 'white',
-    },
-});
 
 export default class HomePage extends Component {
     constructor(props) {
@@ -63,6 +44,7 @@ export default class HomePage extends Component {
             autoClose: 3000,
             hideProgressBar: true
         });
+        store.dispatch(addToCart(this.state.hoodie_v1));
     }
 
     getClothing(chosen_color) {
@@ -148,7 +130,7 @@ export default class HomePage extends Component {
                         <Grid container direction="row" justify="center">
                             <div className={"home-featured-preview"}>
                                 <Grid container direction="column">
-                                    <a href={"/item-selection/"+this.state.sweatshirt.item_id}>
+                                    <Link to={"/item-selection/"+this.state.sweatshirt.item_id}>
                                         <div>
                                             <Grid container direction={"row"} alignItems="center">
                                                 <div>
@@ -164,9 +146,9 @@ export default class HomePage extends Component {
 
                                             </Grid>
                                         </div>
-                                    </a>
+                                    </Link>
 
-                                    <a href={"/item-selection/"+this.state.t_shirt.item_id}>
+                                    <Link to={"/item-selection/"+this.state.t_shirt.item_id}>
                                         <div>
                                             <Grid container direction={"row"} alignItems="center">
                                                 <div>
@@ -181,9 +163,9 @@ export default class HomePage extends Component {
                                                 </div>
                                             </Grid>
                                         </div>
-                                    </a>
+                                    </Link>
 
-                                    <a href={"/item-selection/"+this.state.beanie.item_id}>
+                                    <Link to={"/item-selection/"+this.state.beanie.item_id}>
                                         <div>
                                             <Grid container direction={"row"} alignItems="center">
                                                 <div>
@@ -198,23 +180,23 @@ export default class HomePage extends Component {
                                                 </div>
                                             </Grid>
                                         </div>
-                                    </a>
+                                    </Link>
 
                                 </Grid>
                             </div>
                             {/* Center of the preview featured collection - colour picker and featured */}
                             <div className={"home-featured-preview-center"}>
                                 <Grid container direction="column" justify="center" alignItems="center">
-                                    <a href={"/item-selection/"+this.state.hoodie_v1.item_id}>
+                                    <Link to={"/item-selection/"+this.state.hoodie_v1.item_id}>
                                         <img className={"home-featured-main-image"} src={this.state.hoodie_v1.image}/>
-                                    </a>
+                                    </Link>
                                     <Grid container direction="row">
-                                        <a href={"/item-selection/"+this.state.hoodie_v1.item_id}>
+                                        <Link to={"/item-selection/"+this.state.hoodie_v1.item_id}>
                                             <img className={"home-featured-preview-images"} src={this.state.hoodie_v1.image}/>
-                                        </a>
-                                        <a href={"/item-selection/"+this.state.hoodie_v2.item_id}>
+                                        </Link>
+                                        <Link to={"/item-selection/"+this.state.hoodie_v2.item_id}>
                                             <img className={"home-featured-preview-images"} src={this.state.hoodie_v2.image}/>
-                                        </a>
+                                        </Link>
                                     </Grid>
                                     <b className={"home-featured-main-colours"}>Colours</b>
                                     <div>
@@ -248,9 +230,9 @@ export default class HomePage extends Component {
                                           <ToggleButton className={"home-size-button"} value="L">L</ToggleButton>
                                         </ToggleButtonGroup>
                                         <Grid className={"home-action-buttons"} container direction={"row"}>
-                                            <a href={"/item-selection/"+this.state.hoodie_v1.item_id}>
+                                            <Link to={"/item-selection/"+this.state.hoodie_v1.item_id}>
                                                 <CustomButton>BUY</CustomButton>
-                                            </a>
+                                            </Link>
                                             <CustomButton onClick={() => {this.addToCart()}}>ADD TO CART</CustomButton>
                                         </Grid>
                                     </Grid>

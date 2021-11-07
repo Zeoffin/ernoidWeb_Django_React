@@ -1,32 +1,13 @@
 import React, { Component } from 'react';
 import Grid from "@material-ui/core/Grid";
 import {FormControl, FormControlLabel, Radio, RadioGroup} from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import styled from "@material-ui/core/styles/styled";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import ToggleButton from "@mui/material/ToggleButton";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-    const CustomButton = styled(Button)({
-        boxShadow: 'none',
-        textTransform: 'none',
-        fontSize: 16,
-        padding: '6px 12px',
-        border: '2px solid',
-        lineHeight: 1.5,
-        backgroundColor: 'white',
-        borderColor: 'black',
-        borderRadius: '30px',
-        '&:hover': {
-            backgroundColor: 'black',
-            color: 'white'
-        },
-        '&:active': {
-            boxShadow: 'none',
-            backgroundColor: 'white',
-        },
-    });
+import {ItemCustomButton} from "../customComponents";
+import store from "../redux/store";
+import {addToCart} from "../redux/shopping/shopping-actions";
 
 export default class ItemSelection extends Component {
     constructor(props) {
@@ -34,7 +15,7 @@ export default class ItemSelection extends Component {
         this.itemId = this.props.match.params.itemId;
         this.state = {
             size: 'M',
-            selected_id: this.itemId,
+            item_id: this.itemId,
             item: {},
             colors: []
         }
@@ -43,9 +24,10 @@ export default class ItemSelection extends Component {
 
     addToCart() {
         toast.success('Item has been added to the cart!', {
-            autoClose: 3000,
+            autoClose: 2000,
             hideProgressBar: true
         });
+        store.dispatch(addToCart(this.state));
     }
 
     chooseSize(size) {
@@ -61,7 +43,7 @@ export default class ItemSelection extends Component {
         if (colorItemId) {
             this.itemId = colorItemId;
             this.setState({
-                selected_id: colorItemId
+                item_id: colorItemId
             })
         }
         fetch('/api/selected-item?item_id=' + this.itemId)
@@ -131,12 +113,12 @@ export default class ItemSelection extends Component {
                             <ToggleButton className={"home-size-button"} value="M">M</ToggleButton>
                             <ToggleButton className={"home-size-button"} value="L">L</ToggleButton>
                         </ToggleButtonGroup>
-                        <CustomButton onClick={() => {console.log('BUY CLICKED');}}>
+                        <ItemCustomButton onClick={() => {console.log('BUY CLICKED');}}>
                             BUY
-                        </CustomButton>
-                        <CustomButton onClick={() => {this.addToCart()}}>
+                        </ItemCustomButton>
+                        <ItemCustomButton onClick={() => {this.addToCart()}}>
                             ADD TO CART
-                        </CustomButton>
+                        </ItemCustomButton>
                     </div>
                 </Grid>
             </div>
