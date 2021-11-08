@@ -13,7 +13,7 @@ export const removeFromCart = (item) => {
     return {
         type: actionTypes.REMOVE_FROM_CART,
         payload: {
-            item: item
+            item: item,
         }
     }
 }
@@ -23,7 +23,7 @@ export const adjustQuantity = (item, value) => {
         type: actionTypes.ADJUST_QUANTITY,
         payload: {
             item: item,
-            qty: value
+            count: value
         }
     }
 }

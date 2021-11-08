@@ -42,3 +42,24 @@ export const ItemCustomButton = styled(Button)({
         backgroundColor: 'white',
     },
 });
+
+export const ContinueToCheckoutButton = styled(Button)({
+    boxShadow: 'none',
+    textTransform: 'none',
+    fontSize: 16,
+    padding: '6px 12px',
+    border: '2px solid',
+    marginTop: '10px',
+    lineHeight: 1.5,
+    backgroundColor: 'white',
+    borderColor: 'black',
+    borderRadius: '0px',
+    '&:hover': {
+        backgroundColor: 'black',
+        color: 'white'
+    },
+    '&:active': {
+        boxShadow: 'none',
+        backgroundColor: 'white',
+    },
+});

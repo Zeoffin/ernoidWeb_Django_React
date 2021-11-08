@@ -4,7 +4,9 @@
     margin-bottom: 0;
     padding-bottom: 5%;
     padding-top: 3%;
-    width: 100%;
+    display: flex;
+    flex-flow: column;
+    min-height: 80%;
 }
 
 .collection-main a{

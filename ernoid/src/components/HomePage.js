@@ -40,11 +40,24 @@ export default class HomePage extends Component {
     }
 
     addToCart() {
+        let addedItem = this.state.hoodie_v1;
+        let addedHoodieItem = {
+            item_id: addedItem.item_id,
+            size: this.state.size,
+            item: {
+                colour: addedItem.colour,
+                collection: addedItem.collection,
+                clothing_type: addedItem.clothing_type,
+                preview_image: addedItem.image,
+                price: addedItem.price
+            }
+        };
+
+        store.dispatch(addToCart(addedHoodieItem));
         toast.success('Item has been added to the cart!', {
             autoClose: 3000,
             hideProgressBar: true
         });
-        store.dispatch(addToCart(this.state.hoodie_v1));
     }
 
     getClothing(chosen_color) {
