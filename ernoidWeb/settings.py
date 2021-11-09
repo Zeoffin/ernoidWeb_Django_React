@@ -158,6 +158,9 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'ernoid/static')]
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
     ]
 }
 
@@ -168,9 +171,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # TODO: CHANGE TO LOCAL VARIABLES!
 # Configure STRIPE API
-STRIPE_PUBLIC_KEY = "pk_test_51Jr03WDtwfaviqRhSlmSDWvYRDWu3oRnpLywgE00UiNEy4PGKGRPkxqjsKDrhpjuVcJnb7KpIvg2BCiSAFqzvcn500uxA6hYGh"
-STRIPE_SECRET_KEY = "sk_test_51Jr03WDtwfaviqRhDxOrhQ6ewxSPfkppSReVXq7MmDjYR0SNgsx377yLFqWYpdUKk8t9C8nb0z4Bk4kOxfjTihGw00mwD3sTsy"
-STRIPE_WEBHOOK_SECRET = ""
+STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
 
 # Configure Django App for Heroku.
 django_heroku.settings(locals(), staticfiles=False)
