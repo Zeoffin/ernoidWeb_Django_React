@@ -9,6 +9,7 @@ from .models import Clothing, ClothingType, Colour, Collection
 from .serializers import ClothingSerializer, ClothingtypeSerializer, ColourSerializer, CollectionSerializer
 
 import stripe
+import json
 
 stripe.api_key = settings.STRIPE_SECRET_KEY     # TODO: Change for production
 
@@ -122,6 +123,8 @@ class GetFeaturedCollection(APIView):
                     'collection': item.collection.name.capitalize(),
                     'material': item.material,
                     'image': item.preview_image.url,
+                    'back_image': item.preview_image_back.url if item.preview_image_back else None,
+                    'live_image': item.preview_image_live.url if item.preview_image_live else None,
                     'clothing_type': item.type.name,
                     'type_version': item.type.version,
                     'description': item.description,
@@ -204,6 +207,9 @@ class CreateCheckoutSessionView(APIView):
         try:
             checkout_session = stripe.checkout.Session.create(
                 line_items=item_array,
+                shipping_address_collection={
+                    'allowed_countries': ['US', 'CA'],
+                },
                 payment_method_types=[
                     'card',
                 ],
@@ -217,3 +223,12 @@ class CreateCheckoutSessionView(APIView):
             return Response(
                 {'error': 'Error when creating stripe session'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+
+    # Tsting Method
+    def get(self, request):
+
+        shipping_address = request.GET.get('shipping_address')
+
+        return Response({
+            'add': json.loads(shipping_address)
+        })

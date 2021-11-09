@@ -207,8 +207,8 @@ export default class HomePage extends Component {
                                         <Link to={"/item-selection/"+this.state.hoodie_v1.item_id}>
                                             <img className={"home-featured-preview-images"} src={this.state.hoodie_v1.image}/>
                                         </Link>
-                                        <Link to={"/item-selection/"+this.state.hoodie_v2.item_id}>
-                                            <img className={"home-featured-preview-images"} src={this.state.hoodie_v2.image}/>
+                                        <Link to={"/item-selection/"+this.state.hoodie_v1.item_id}>
+                                            <img className={"home-featured-preview-images"} src={this.state.hoodie_v1.back_image}/>
                                         </Link>
                                     </Grid>
                                     <b className={"home-featured-main-colours"}>Colours</b>

@@ -10,7 +10,7 @@ export default class OrderSuccess extends Component {
     render() {
         return (
         <div>
-            <p>Order has been successful!</p>
+            <p>Order success!</p>
         </div>
         )
     }

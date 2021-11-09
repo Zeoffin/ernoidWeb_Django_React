@@ -4,7 +4,8 @@ from .models import Clothing, ClothingType, Colour, Collection
 class ClothingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Clothing
-        fields = ('id', 'type', 'collection', 'preview_image', 'description', 'colour', 'material')
+        fields = ('id', 'type', 'collection', 'preview_image', 'preview_image_back', 'preview_image_live',
+                  'description', 'colour', 'material')
 
 class ClothingtypeSerializer(serializers.ModelSerializer):
     class Meta:

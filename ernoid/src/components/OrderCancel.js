@@ -9,8 +9,9 @@ export default class OrderCancel extends Component {
 
     render() {
         return (
-        <div>
-            <p>Order canceled!</p>
+        <div className={"collection-main"}>
+            <b className={"collection-text"}>Your order has been cancelled!</b>
+            <p className={"collection-text"}>Feel free to browse around and checkout whenever you are ready!</p>
         </div>
         )
     }

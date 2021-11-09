@@ -43,7 +43,7 @@ export default class ShoppingCart extends Component {
         return orderTotal.toFixed(2);
     }
 
-    makeOrderLink() {
+    formatOrderIds() {
         let returnLink = ""
         this.state.items.forEach((item) => {
             let accessItem = item.item;
@@ -54,6 +54,26 @@ export default class ShoppingCart extends Component {
         });
         returnLink = returnLink.slice(0, -1);
         return returnLink
+    }
+
+    formatShippingAddress() {
+
+        let shipping_data = {
+            "address_to": {
+                "first_name": "John",
+                "last_name": "Smith",
+                "email": "example@msn.com",
+                "phone": "0574 69 21 90",
+                "country": "BE",
+                "region": "",
+                "address1": "ExampleBaan 121",
+                "address2": "45",
+                "city": "Retie",
+                "zip": "2470"
+            }
+        }
+
+        return JSON.stringify(shipping_data);
     }
 
     showCartItems() {
@@ -132,7 +152,8 @@ export default class ShoppingCart extends Component {
                                 </div>
 
                                 <form action="../api/create-checkout-session" method="POST">
-                                    <ContinueToCheckoutButton type="submit" name="item_id" value={this.makeOrderLink()}>CONTINUE TO CHECKOUT</ContinueToCheckoutButton>
+                                    <input type="hidden" name="shipping_address" value={this.formatShippingAddress()} />
+                                    <ContinueToCheckoutButton type="submit" name="item_id" value={this.formatOrderIds()}>CONTINUE TO CHECKOUT</ContinueToCheckoutButton>
                                 </form>
 
                                 <p className={"cart-checkout-policy-accept"}>We accept:</p>
