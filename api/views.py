@@ -1,9 +1,16 @@
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
-
+from django.conf import settings
+from rest_framework import status
+from django.shortcuts import redirect
+from django.views.decorators.csrf import csrf_exempt
 from .models import Clothing, ClothingType, Colour, Collection
 from .serializers import ClothingSerializer, ClothingtypeSerializer, ColourSerializer, CollectionSerializer
+
+import stripe
+
+stripe.api_key = settings.STRIPE_SECRET_KEY     # TODO: Change for production
 
 
 class ClothingView(generics.ListAPIView):
@@ -160,3 +167,53 @@ class GetSelectedItem(APIView):
         }
 
         return Response(response)
+
+
+class CreateCheckoutSessionView(APIView):
+
+    @csrf_exempt
+    def post(self, request, *args, **kwargs):
+
+        if settings.ON_HEROKU:
+            current_domain = "https://ernoid.herokuapp.com"     # TODO: Change when new domain
+        else:
+            current_domain = "http://localhost:8000"
+
+        # Get ids of the items and split them
+        item_ids = request.POST.get('item_id').split(',')
+        item_array = []
+
+        # Format clothing items for request using stripe API
+        for item_id in item_ids:
+            clothing = Clothing.objects.get(id=item_id)  # Get item
+            in_array = False
+            for item in item_array:
+                in_array = False
+                if clothing.stripe_id == item['price']:  # If the item is already in the list, update quantity
+                    item['quantity'] += 1
+                    in_array = True
+                    break
+            if not in_array:  # If not in the list, add it for the first time with quantity '1'
+                item_array.append(
+                    {
+                        'price': str(clothing.stripe_id),
+                        'quantity': 1
+                    }
+                )
+
+        try:
+            checkout_session = stripe.checkout.Session.create(
+                line_items=item_array,
+                payment_method_types=[
+                    'card',
+                ],
+                mode='payment',
+                success_url=current_domain + '/order-success?session_id={CHECKOUT_SESSION_ID}',
+                cancel_url=current_domain + '/order-cancel',
+            )
+            return redirect(checkout_session.url)
+
+        except:
+            return Response(
+                {'error': 'Error when creating stripe session'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import main, CreateCheckoutSessionView
+from .views import main
 
 urlpatterns = [
     path('', main),
@@ -9,6 +9,6 @@ urlpatterns = [
     path('clothes/<str:clothingType>', main),
     path('shopping-cart', main),
     path('item-selection/<int:ItemId>', main),
-    path('checkout', main),
-    path('create-checkout-session', CreateCheckoutSessionView.as_view())
+    path('order-success', main),
+    path('order-cancel', main),
 ]

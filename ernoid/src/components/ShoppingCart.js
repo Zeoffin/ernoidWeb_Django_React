@@ -6,6 +6,7 @@ import { ContinueToCheckoutButton } from "../customComponents";
 import { removeFromCart, adjustQuantity } from "../redux/shopping/shopping-actions";
 
 export default class ShoppingCart extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -40,6 +41,19 @@ export default class ShoppingCart extends Component {
         // TODO: Delivery 10.00... hardcoded?
         let orderTotal = parseFloat(this.getOrderValue())+10;
         return orderTotal.toFixed(2);
+    }
+
+    makeOrderLink() {
+        let returnLink = ""
+        this.state.items.forEach((item) => {
+            let accessItem = item.item;
+            for(let i = 0; i < parseInt(item.count); i++) {
+                returnLink += accessItem.item_id;
+                returnLink += ','
+            }
+        });
+        returnLink = returnLink.slice(0, -1);
+        return returnLink
     }
 
     showCartItems() {
@@ -117,9 +131,10 @@ export default class ShoppingCart extends Component {
                                     </Grid>
                                 </div>
 
-                                <Link to={"../checkout"}>
-                                    <ContinueToCheckoutButton>CONTINUE TO CHECKOUT</ContinueToCheckoutButton>
-                                </Link>
+                                <form action="../api/create-checkout-session" method="POST">
+                                    <ContinueToCheckoutButton type="submit" name="item_id" value={this.makeOrderLink()}>CONTINUE TO CHECKOUT</ContinueToCheckoutButton>
+                                </form>
+
                                 <p className={"cart-checkout-policy-accept"}>We accept:</p>
                                 <img className={"cart-checkout-payments"} src={"/static/images/assets/payment_methods2.png"}/>
                                 <p className={"cart-checkout-policy"}>

@@ -7,9 +7,10 @@ import HomePage from "./HomePage";
 import Collections from "./Collections";
 import Collection from "./Collection"
 import Clothes from "./Clothes";
-import Checkout from "./Checkout"
 import ShoppingCart from "./ShoppingCart";
 import ItemSelection from "./ItemSelection";
+import OrderSuccess from "./OrderSuccess";
+import OrderCancel from "./OrderCancel";
 import Footer from "./Footer";
 import Header from "./Header";
 
@@ -39,7 +40,8 @@ export default class App extends Component {
                         <Route path={"/clothes/:clothingType"} component={Clothes}/>
                         <Route path={"/shopping-cart"} component={ShoppingCart}/>
                         <Route path={"/item-selection/:itemId"} component={ItemSelection}/>
-                        <Route path={"/checkout"} component={Checkout}/>
+                        <Route path={"/order-success"} component={OrderSuccess}/>
+                        <Route path={"/order-cancel"} component={OrderCancel}/>
                     </Switch>
                     <Footer/>
                 </Router>
