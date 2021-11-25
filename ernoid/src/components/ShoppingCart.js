@@ -49,31 +49,13 @@ export default class ShoppingCart extends Component {
             let accessItem = item.item;
             for(let i = 0; i < parseInt(item.count); i++) {
                 returnLink += accessItem.item_id;
+                returnLink += '/'
+                returnLink += accessItem.size;
                 returnLink += ','
             }
         });
         returnLink = returnLink.slice(0, -1);
         return returnLink
-    }
-
-    formatShippingAddress() {
-
-        let shipping_data = {
-            "address_to": {
-                "first_name": "John",
-                "last_name": "Smith",
-                "email": "example@msn.com",
-                "phone": "0574 69 21 90",
-                "country": "BE",
-                "region": "",
-                "address1": "ExampleBaan 121",
-                "address2": "45",
-                "city": "Retie",
-                "zip": "2470"
-            }
-        }
-
-        return JSON.stringify(shipping_data);
     }
 
     showCartItems() {
@@ -152,7 +134,6 @@ export default class ShoppingCart extends Component {
                                 </div>
 
                                 <form action="../api/create-checkout-session" method="POST">
-                                    <input type="hidden" name="shipping_address" value={this.formatShippingAddress()} />
                                     <ContinueToCheckoutButton type="submit" name="item_id" value={this.formatOrderIds()}>CONTINUE TO CHECKOUT</ContinueToCheckoutButton>
                                 </form>
 

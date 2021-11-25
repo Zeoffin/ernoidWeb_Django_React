@@ -4,14 +4,13 @@ from rest_framework.response import Response
 from django.conf import settings
 from rest_framework import status
 from django.shortcuts import redirect
-from django.views.decorators.csrf import csrf_exempt
 from .models import Clothing, ClothingType, Colour, Collection
 from .serializers import ClothingSerializer, ClothingtypeSerializer, ColourSerializer, CollectionSerializer
 
 import stripe
 import json
 
-stripe.api_key = settings.STRIPE_SECRET_KEY     # TODO: Change for production
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 class ClothingView(generics.ListAPIView):
@@ -164,6 +163,7 @@ class GetSelectedItem(APIView):
             'colour': data.colour.name,
             'colour_hex': data.colour.hex_value,
             'preview_image': data.preview_image.url,
+            'preview_image_back': data.preview_image_back.url if data.preview_image_back else None,
             'collection': data.collection.name,
             'clothing_type': data.type.name,
             'price': data.price
@@ -174,7 +174,6 @@ class GetSelectedItem(APIView):
 
 class CreateCheckoutSessionView(APIView):
 
-    @csrf_exempt
     def post(self, request, *args, **kwargs):
 
         if settings.ON_HEROKU:
@@ -182,14 +181,29 @@ class CreateCheckoutSessionView(APIView):
         else:
             current_domain = "http://localhost:8000"
 
-        # Get ids of the items and split them
-        item_ids = request.POST.get('item_id').split(',')
         item_array = []
+        item_ids = []
+        sizes = []
+        stripe_metadata = []
 
-        # Format clothing items for request using stripe API
-        for item_id in item_ids:
+        # Get ids of the items and split them
+        ordered_items = request.POST.get('item_id').split(',')
+
+        # Extract IDs
+        for i in ordered_items:
+            item_id = [int(s) for s in i.split('/') if s.isdigit()]
+            item_ids.append(item_id[0])
+
+        # Extract size
+        for i in ordered_items:
+            sizes.append(i[-1])
+
+        # Format clothing items for request using stripe API and metadata
+        for index, item_id in enumerate(item_ids):
             clothing = Clothing.objects.get(id=item_id)  # Get item
             in_array = False
+            in_metadata_array = False
+
             for item in item_array:
                 in_array = False
                 if clothing.stripe_id == item['price']:  # If the item is already in the list, update quantity
@@ -204,31 +218,43 @@ class CreateCheckoutSessionView(APIView):
                     }
                 )
 
+            for size_index, item in enumerate(stripe_metadata):
+                in_metadata_array = False
+                if str(clothing.printify_product_id) == item['product_id']:
+                    if item['size'] == sizes[index]:
+                        item['quantity'] += 1
+                        in_metadata_array = True
+                        break
+            if not in_metadata_array:
+                stripe_metadata.append(
+                    {
+                        'product_id': str(clothing.printify_product_id),
+                        'color': str(clothing.colour.name),
+                        'size': str(sizes[index]),
+                        'quantity': 1
+                    }
+
+                )
+
         try:
             checkout_session = stripe.checkout.Session.create(
                 line_items=item_array,
+                metadata={
+                    'meta': json.dumps(stripe_metadata)
+                },
                 shipping_address_collection={
-                    'allowed_countries': ['US', 'CA'],
+                    'allowed_countries': ['US', 'GB'],
                 },
                 payment_method_types=[
                     'card',
                 ],
                 mode='payment',
-                success_url=current_domain + '/order-success?session_id={CHECKOUT_SESSION_ID}',
+                success_url=current_domain + '/order-success?session_id={CHECKOUT_SESSION_ID}',     # TODO: Placing your order...
                 cancel_url=current_domain + '/order-cancel',
             )
             return redirect(checkout_session.url)
 
-        except:
+        except Exception as e:
             return Response(
-                {'error': 'Error when creating stripe session'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                {'Error': f'{e}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
-
-    # Tsting Method
-    def get(self, request):
-
-        shipping_address = request.GET.get('shipping_address')
-
-        return Response({
-            'add': json.loads(shipping_address)
-        })

@@ -43,6 +43,7 @@ class Clothing(models.Model):
     material = models.CharField(max_length=40, default="")
     price = models.DecimalField(max_digits=4, decimal_places=2, default=19.99)
     stripe_id = models.CharField(max_length=50, default="")
+    printify_product_id = models.CharField(max_length=50, default="")
 
     def __str__(self):
         return str(self.collection.name.capitalize() + ' ' + self.type.name.capitalize() + ' ' + self.colour.name.capitalize())

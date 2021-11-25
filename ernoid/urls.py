@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import main
+from api.webhooks import stripe_webhook
 
 urlpatterns = [
     path('', main),
@@ -11,4 +12,5 @@ urlpatterns = [
     path('item-selection/<int:ItemId>', main),
     path('order-success', main),
     path('order-cancel', main),
+    path('webhooks/stripe', stripe_webhook, name='stripe-webhook')
 ]

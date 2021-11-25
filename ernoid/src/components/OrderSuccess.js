@@ -9,8 +9,9 @@ export default class OrderSuccess extends Component {
 
     render() {
         return (
-        <div>
-            <p>Order success!</p>
+        <div className={"collection-main"}>
+            <b className={"collection-text"}>Success!</b>
+            <p className={"order-success-subtext"}>Your order has been placed. Please check your email for details!</p>
         </div>
         )
     }

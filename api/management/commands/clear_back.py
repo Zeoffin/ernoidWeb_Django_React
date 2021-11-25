@@ -3,7 +3,7 @@ from api.models import Clothing
 
 
 class Command(BaseCommand):
-    help = 'Closes the specified poll for voting'
+    help = 'Removes all ImageField images of back preview'
 
     def handle(self, *args, **options):
 
@@ -14,4 +14,3 @@ class Command(BaseCommand):
             item.save()
 
         self.stdout.write(self.style.SUCCESS('Done'))
-        print('Done')
