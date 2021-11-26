@@ -58,6 +58,23 @@ export default class ShoppingCart extends Component {
         return returnLink
     }
 
+    displaySize(item) {
+        let return_array = []
+
+        if (item.item.clothing_type !== 'Beanie') {
+            return_array.push(
+                <p className={"cart-item-no-margin-bot"}>Size: {item.size}</p>
+            )
+        } else {
+            return_array.push(
+                <p className={"cart-item-no-margin-bot"}>One size fits all</p>
+            )
+        }
+
+        return return_array
+
+    }
+
     showCartItems() {
         let returnArray = [];
         this.state.items.forEach((item) => {
@@ -81,7 +98,7 @@ export default class ShoppingCart extends Component {
                                         <div>
                                             <Grid container direction={"column"}>
                                                 <p className={"cart-item-no-margin-bot"}>Color: {accessItem.item.colour}</p>
-                                                <p className={"cart-item-no-margin-bot"}>Size: {accessItem.size}</p>
+                                                {this.displaySize(accessItem)}
                                             </Grid>
                                         </div>
                                         <input className={"cart-item-count"}
