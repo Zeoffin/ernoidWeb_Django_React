@@ -78,7 +78,6 @@ def stripe_webhook(request):
 def setup_body(customer_details, address, metadata, customer):
 
     line_items = []
-
     for item in json.loads(metadata):
         line_items.append(get_item_variant(item))
 
@@ -127,9 +126,10 @@ def get_item_variant(item):
     response_item = item_response.json()
     size = item['size']
     color = item['color']
-    variant_title = f'{color} / {size}'
+    variant_title_1 = f'{color} / {size}'
+    variant_title_2 = f'{size} / {color}'
     for variants in response_item['variants']:
-        if variants['title'] == variant_title:
+        if variants['title'] == variant_title_1 or variants['title'] == variant_title_2:
             line_item['variant_id'] = variants['id']
 
     return line_item
