@@ -218,6 +218,7 @@ class CreateCheckoutSessionView(APIView):
                     }
                 )
 
+            # Add metadata
             for size_index, item in enumerate(stripe_metadata):
                 in_metadata_array = False
                 if str(clothing.printify_product_id) == item['product_id']:
@@ -226,11 +227,15 @@ class CreateCheckoutSessionView(APIView):
                         in_metadata_array = True
                         break
             if not in_metadata_array:
+                if clothing.type.name == 'Beanie':      # Since beanies have 'One size' on printify API
+                    size = 'One size'
+                else:
+                    size = str(sizes[index])
                 stripe_metadata.append(
                     {
                         'product_id': str(clothing.printify_product_id),
                         'color': str(clothing.colour.name),
-                        'size': str(sizes[index]),
+                        'size': size,
                         'quantity': 1
                     }
 
