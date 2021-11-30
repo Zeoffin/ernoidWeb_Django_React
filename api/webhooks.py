@@ -38,21 +38,23 @@ def stripe_webhook(request):
         customer_details = session['customer_details']
 
         json_body = setup_body(customer_details, address, metadata['meta'], customer)
-        order_id = submit_new_order(json_body)
+        order_id = submit_new_order(json_body)      # order_id used for sending the order into production
 
-        # If on production, send the item to production
-        # if settings.ON_HEROKU:
-        #     requests.post(BASE_URL + f'shops/{SHOP_ID}/orders/{order_id}/send_to_production.json')
+        # No need for sending the order into the production - but its left here just in case
+        # requests.post(BASE_URL + f'shops/{SHOP_ID}/orders/{order_id}/send_to_production.json')
+
+        customer_name = address['name'].split(' ')
 
         send_mail(
             'Your ERNOID order',
+            f'Dear {customer_name[0]},\n'
+            'Thank you for shopping with us! Your order is currently being processed. \n'
+            'You will be notified when your order has been shipped.\n\n'
             'Thank you for shopping with us!',
             'ernoidshop@gmail.com',
             [json_body['address_to']['email']],
             fail_silently=False,
         )
-
-        # TODO: Redirect to success page!
 
     elif event['type'] == 'checkout.session.async_payment_failed':
         session = event['data']['object']
@@ -63,9 +65,14 @@ def stripe_webhook(request):
 
         json_body = setup_body(customer_details, address, metadata['meta'], customer)
 
+        customer_name = address['name'].split(' ')
+
         send_mail(
-            'Your payment failed for ERNOID order',
-            'Your payment has failed.',
+            f'Your payment failed for ERNOID order',
+            f'Dear {customer_name[0]},\n'
+            'Unfortunately, your payment method has failed while placing an order. \n'
+            'Please try to resolve the issue and then try again. \n'
+            'For any additional help, please contact us using this email. \n',
             'ernoidshop@gmail.com',
             [json_body['address_to']['email']],
             fail_silently=False,

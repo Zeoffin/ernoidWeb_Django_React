@@ -11,6 +11,7 @@ import ShoppingCart from "./ShoppingCart";
 import ItemSelection from "./ItemSelection";
 import OrderSuccess from "./OrderSuccess";
 import OrderCancel from "./OrderCancel";
+import Terms from "./Terms";
 import Footer from "./Footer";
 import Header from "./Header";
 
@@ -42,6 +43,7 @@ export default class App extends Component {
                         <Route path={"/item-selection/:itemId"} component={ItemSelection}/>
                         <Route path={"/order-success"} component={OrderSuccess}/>
                         <Route path={"/order-cancel"} component={OrderCancel}/>
+                        <Route path={"/terms"} component={Terms}/>
                     </Switch>
                     <Footer/>
                 </Router>

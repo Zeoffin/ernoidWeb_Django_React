@@ -31,3 +31,11 @@
     width: auto;
     height: auto;
 }
+
+.footer-main-terms {
+    text-decoration: none;
+}
+
+.footer-main-terms:hover {
+    color: darkgray;
+}

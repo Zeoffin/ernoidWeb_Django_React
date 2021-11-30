@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Grid from "@material-ui/core/Grid";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
 
@@ -27,8 +28,9 @@ export default function Footer() {
             <div className={"footer-main-div"}>
                 <Grid className={"footer-main-div"} container direction="column">
                     <b>LEGAL</b>
-                    <p>Terms</p>
-                    <p>Privacy</p>
+                    <Link to={"/terms"} className={"footer-main-terms"}>
+                        <p className={"footer-main-terms"}>Terms</p>
+                    </Link>
                     <img className={"footer-pic-limit"} style={{maxHeight: '30px', marginTop: '40px'}} src={"/static/images/assets/payment_methods2.png"}/>
                 </Grid>
             </div>

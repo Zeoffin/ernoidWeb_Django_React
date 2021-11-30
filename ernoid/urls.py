@@ -12,5 +12,6 @@ urlpatterns = [
     path('item-selection/<int:ItemId>', main),
     path('order-success', main),
     path('order-cancel', main),
+    path('terms', main),
     path('webhooks/stripe', stripe_webhook, name='stripe-webhook')
 ]

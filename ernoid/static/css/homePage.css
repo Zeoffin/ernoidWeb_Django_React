@@ -158,6 +158,26 @@ Override ToggleButton settings for custom style
     background-color: black !important;
 }
 
+.terms-text {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.terms-text p {
+    margin-bottom: 30px;
+}
+
+.terms-text b {
+    margin-bottom: 15px;
+    text-transform: capitalize;
+    letter-spacing: .1rem;
+    font-size: 23px;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /*
 Override carousel default settings
  */
