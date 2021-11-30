@@ -250,11 +250,23 @@ class CreateCheckoutSessionView(APIView):
                 shipping_address_collection={
                     'allowed_countries': ['US', 'GB'],
                 },
+                shipping_options=[
+                    {
+                        'shipping_rate_data': {
+                            'type': 'fixed_amount',
+                            'fixed_amount': {
+                                'amount': 1000,         # Shipment cost - 10.00 USD
+                                'currency': 'usd',
+                            },
+                            'display_name': 'Standard shipping rate',
+                        }
+                    }
+                ],
                 payment_method_types=[
                     'card',
                 ],
                 mode='payment',
-                success_url=current_domain + '/order-success?session_id={CHECKOUT_SESSION_ID}',     # TODO: Placing your order...
+                success_url=current_domain + '/order-success?session_id={CHECKOUT_SESSION_ID}',
                 cancel_url=current_domain + '/order-cancel',
             )
             return redirect(checkout_session.url)
