@@ -173,6 +173,7 @@ class GetSelectedItem(APIView):
 
 
 class CreateCheckoutSessionView(APIView):
+    """ Create a STRIPE checkout session """
 
     def post(self, request, *args, **kwargs):
 
@@ -259,6 +260,16 @@ class CreateCheckoutSessionView(APIView):
                                 'currency': 'usd',
                             },
                             'display_name': 'Standard shipping rate',
+                            'delivery_estimate': {
+                                'minimum': {
+                                    'unit': 'business_day',
+                                    'value': 15,
+                                },
+                                'maximum': {
+                                    'unit': 'business_day',
+                                    'value': 28,
+                                },
+                            }
                         }
                     }
                 ],

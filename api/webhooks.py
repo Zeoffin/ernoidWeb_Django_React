@@ -49,7 +49,8 @@ def stripe_webhook(request):
             'Your ERNOID order',
             f'Dear {customer_name[0]},\n'
             'Thank you for shopping with us! Your order is currently being processed. \n'
-            'You will be notified when your order has been shipped.\n\n'
+            'You will be notified when your order is out for delivery. '
+            'The estimated shipping time is 15 - 28 business days.\n\n'
             'Thank you for shopping with us!',
             'ernoidshop@gmail.com',
             [json_body['address_to']['email']],
