@@ -178,7 +178,7 @@ class CreateCheckoutSessionView(APIView):
     def post(self, request, *args, **kwargs):
 
         if settings.ON_HEROKU:
-            current_domain = "https://ernoid.herokuapp.com"     # TODO: Change when new domain
+            current_domain = "https://ernoid.live"     # TODO: Change when new domain
         else:
             current_domain = "http://localhost:8000"
 
