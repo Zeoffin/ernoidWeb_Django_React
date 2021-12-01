@@ -57,7 +57,9 @@ export default function Header() {
         <div className={"header-style"}>
             <Grid container direction="row" justify="center" alignItems="center">
 
-                <img className={"header-logo"} src={"/static/images/branding/ERNOID_Typography_White.png"}/>
+                <Link to={"/"}>
+                    <img className={"header-logo"} src={"/static/images/branding/ERNOID_Typography_White.png"}/>
+                </Link>
 
                 <div className={"header-navigation"}>
                     <Grid container direction="row" justify="center" alignItems="center">
