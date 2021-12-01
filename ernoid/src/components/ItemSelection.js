@@ -151,7 +151,12 @@ export default class ItemSelection extends Component {
                         </p>
                         <div>
                             <Grid container direction={"column"}>
-                                {this.sizeChoice()}
+                                <div>
+                                    <Grid container direction={"row"} alignItems={"center"}>
+                                        {this.sizeChoice()}
+                                        <p className={"item-selection-price"}>{this.state.item.price}$</p>
+                                    </Grid>
+                                </div>
                                 <Grid className={"home-action-buttons"} container direction={"row"}>
                                     <CustomButton>BUY</CustomButton>
                                     <CustomButton onClick={() => {this.addToCart()}}>ADD TO CART</CustomButton>

@@ -107,6 +107,31 @@ export default class HomePage extends Component {
         return html_array
     }
 
+    renderBeanie() {
+        /**
+         * This function is needed, because censored beanie doesnt have white colour. So ignore this one, when white.
+         * Very hardcoded, very bad.
+         */
+        if (this.state.colour !== 'White') {
+            return  <Link to={"/item-selection/"+this.state.beanie.item_id}>
+                        <div>
+                            <Grid container direction={"row"} alignItems="center">
+                                <div>
+                                    <img className={"home-featured-preview-images"} src={this.state.beanie.image}/>
+                                </div>
+                                <div>
+                                    <Grid container direction={"column"} className={"home-featured-preview-description"}>
+                                        <b className={"home-featured-preview-description-collection"}>{this.state.collection}</b>
+                                        <p className={"home-featured-preview-description-type"}>{this.state.beanie.clothing_type}</p>
+                                        <p className={"home-featured-preview-description-type"}>{this.state.beanie.price} $</p>
+                                    </Grid>
+                                </div>
+                            </Grid>
+                        </div>
+                    </Link>
+        }
+    }
+
     render() {
 
         {/* TODO: Change display images */}
@@ -140,60 +165,52 @@ export default class HomePage extends Component {
                     </div>
                     <div>
                         {/* Left side of the preview featured collection */}
-                        <Grid container direction="row" justify="center">
+                        <Grid container direction="row" justify={"center"} alignItems="center">
                             <div className={"home-featured-preview"}>
-                                <Grid container direction="column">
-                                    <Link to={"/item-selection/"+this.state.sweatshirt.item_id}>
-                                        <div>
-                                            <Grid container direction={"row"} alignItems="center">
-                                                <div>
-                                                        <img className={"home-featured-preview-images"} src={this.state.sweatshirt.image}/>
-                                                </div>
-                                                <div>
-                                                    <Grid container direction={"column"} className={"home-featured-preview-description"}>
-                                                        <b className={"home-featured-preview-description-collection"}>{this.state.collection}</b>
-                                                        <p className={"home-featured-preview-description-type"}>{this.state.sweatshirt.clothing_type}</p>
-                                                        <p className={"home-featured-preview-description-type"}>{this.state.sweatshirt.price} $</p>
-                                                    </Grid>
-                                                </div>
+                                <Grid container direction="column" justify={"center"} alignItems="center">
 
-                                            </Grid>
-                                        </div>
-                                    </Link>
+                                    <div>
+                                        <Link to={"/item-selection/"+this.state.sweatshirt.item_id}>
+                                            <div>
+                                                <Grid container direction={"row"} alignItems="center">
+                                                    <div>
+                                                            <img className={"home-featured-preview-images"} src={this.state.sweatshirt.image}/>
+                                                    </div>
+                                                    <div>
+                                                        <Grid container direction={"column"} className={"home-featured-preview-description"}>
+                                                            <b className={"home-featured-preview-description-collection"}>{this.state.collection}</b>
+                                                            <p className={"home-featured-preview-description-type"}>{this.state.sweatshirt.clothing_type}</p>
+                                                            <p className={"home-featured-preview-description-type"}>{this.state.sweatshirt.price} $</p>
+                                                        </Grid>
+                                                    </div>
 
-                                    <Link to={"/item-selection/"+this.state.t_shirt.item_id}>
-                                        <div>
-                                            <Grid container direction={"row"} alignItems="center">
-                                                <div>
-                                                    <img className={"home-featured-preview-images"} src={this.state.t_shirt.image}/>
-                                                </div>
-                                                <div>
-                                                    <Grid container direction={"column"} className={"home-featured-preview-description"}>
-                                                        <b className={"home-featured-preview-description-collection"}>{this.state.collection}</b>
-                                                        <p className={"home-featured-preview-description-type"}>{this.state.t_shirt.clothing_type}</p>
-                                                        <p className={"home-featured-preview-description-type"}>{this.state.t_shirt.price} $</p>
-                                                    </Grid>
-                                                </div>
-                                            </Grid>
-                                        </div>
-                                    </Link>
+                                                </Grid>
+                                            </div>
+                                        </Link>
+                                    </div>
 
-                                    <Link to={"/item-selection/"+this.state.beanie.item_id}>
-                                        <div>
-                                            <Grid container direction={"row"} alignItems="center">
-                                                <div>
-                                                    <img className={"home-featured-preview-images"} src={this.state.beanie.image}/>
-                                                </div>
-                                                <div>
-                                                    <Grid container direction={"column"} className={"home-featured-preview-description"}>
-                                                        <b className={"home-featured-preview-description-collection"}>{this.state.collection}</b>
-                                                        <p className={"home-featured-preview-description-type"}>{this.state.beanie.clothing_type}</p>
-                                                        <p className={"home-featured-preview-description-type"}>{this.state.beanie.price} $</p>
-                                                    </Grid>
-                                                </div>
-                                            </Grid>
-                                        </div>
-                                    </Link>
+                                    <div>
+                                        <Link to={"/item-selection/"+this.state.t_shirt.item_id}>
+                                            <div>
+                                                <Grid container direction={"row"} alignItems="center">
+                                                    <div>
+                                                        <img className={"home-featured-preview-images"} src={this.state.t_shirt.image}/>
+                                                    </div>
+                                                    <div>
+                                                        <Grid container direction={"column"} className={"home-featured-preview-description"}>
+                                                            <b className={"home-featured-preview-description-collection"}>{this.state.collection}</b>
+                                                            <p className={"home-featured-preview-description-type"}>{this.state.t_shirt.clothing_type}</p>
+                                                            <p className={"home-featured-preview-description-type"}>{this.state.t_shirt.price} $</p>
+                                                        </Grid>
+                                                    </div>
+                                                </Grid>
+                                            </div>
+                                        </Link>
+                                    </div>
+
+                                    <div>
+                                        {this.renderBeanie()}
+                                    </div>
 
                                 </Grid>
                             </div>
@@ -235,13 +252,18 @@ export default class HomePage extends Component {
                                 </p>
                                 <div>
                                     <Grid container direction={"column"}>
-                                        <ToggleButtonGroup exclusive color="primary"
-                                                           value={this.state.size}
-                                                           onChange={(e, size) => this.chooseSize(size)}>
-                                          <ToggleButton className={"home-size-button"} value="S">S</ToggleButton>
-                                          <ToggleButton className={"home-size-button"} value="M">M</ToggleButton>
-                                          <ToggleButton className={"home-size-button"} value="L">L</ToggleButton>
-                                        </ToggleButtonGroup>
+                                        <div>
+                                            <Grid container direction={"row"} alignItems={"center"}>
+                                                <ToggleButtonGroup exclusive color="primary"
+                                                                   value={this.state.size}
+                                                                   onChange={(e, size) => this.chooseSize(size)}>
+                                                  <ToggleButton className={"home-size-button"} value="S">S</ToggleButton>
+                                                  <ToggleButton className={"home-size-button"} value="M">M</ToggleButton>
+                                                  <ToggleButton className={"home-size-button"} value="L">L</ToggleButton>
+                                                </ToggleButtonGroup>
+                                                <p className={"item-selection-price"}>{this.state.hoodie_v1.price}$</p>
+                                            </Grid>
+                                        </div>
                                         <Grid className={"home-action-buttons"} container direction={"row"}>
                                             <Link to={"/item-selection/"+this.state.hoodie_v1.item_id}>
                                                 <CustomButton>BUY</CustomButton>
