@@ -23,6 +23,7 @@ export default function Footer() {
                                 <p>ERNOID</p>
                             </Grid>
                         </a>
+                        <p style={{fontSize: '13px', marginTop: '50px'}}>GB and US deliveries only</p>
                 </Grid>
             </div>
             <div className={"footer-main-div"}>
@@ -31,7 +32,7 @@ export default function Footer() {
                     <Link to={"/terms"} className={"footer-main-terms"}>
                         <p className={"footer-main-terms"}>Terms</p>
                     </Link>
-                    <img className={"footer-pic-limit"} style={{maxHeight: '30px', marginTop: '40px'}} src={"/static/images/assets/payment_methods2.png"}/>
+                    <img className={"footer-pic-limit"} style={{maxHeight: '30px', marginTop: '50px'}} src={"/static/images/assets/payment_methods2.png"}/>
                 </Grid>
             </div>
         </Grid>

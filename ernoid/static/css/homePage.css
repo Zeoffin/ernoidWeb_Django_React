@@ -184,3 +184,7 @@ Override carousel default settings
 .carousel {
     height: 500px !important;
 }
+
+.home-preview-image {
+    transform: translateY(-20%);
+}

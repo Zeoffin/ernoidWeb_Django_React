@@ -109,6 +109,8 @@ export default class Terms extends Component {
 
                 <b>Delivery</b>
                 <p>
+                Deliveries are only made to US and GB. <br/>
+                <br/>
                 After you finalise your order, Prinify will choose the delivery courier with
                 estimated delivery time and dates depending on the delivery address.<br/>
                 <br/>
@@ -127,7 +129,7 @@ export default class Terms extends Component {
                 touch with our Merchant Support team https://help.printify.com/en/ within 30
                 days of product delivery. Printify offers a free replacement or a refund in case of
                 a damaged product or a manufacturing error. Alternatively, please get in touch<br/>
-                with us- <a href = "mailto: abc@example.com">ernoidshop@gmail.com</a>
+                with us- <a href = "mailto: ernoidshop@gmail.com">ernoidshop@gmail.com</a>
                 <br/>
                 <br/>
                 The Printify balance will cover the production and shipping costs of new orders,

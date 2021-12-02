@@ -141,20 +141,20 @@ export default class HomePage extends Component {
                 <ToastContainer/>
                 <div>
                     <Carousel className={"home-main"} autoPlay={"true"}
-                              showThumbs={false}
-                              showArrows={false}
-                              showStatus={false}
-                              infiniteLoop={true}
-                              dynamicHeight={true}
-                              interval={3000}>
+                        showThumbs={false}
+                        showArrows={false}
+                        showStatus={false}
+                        infiniteLoop={true}
+                        dynamicHeight={true}
+                        interval={3000}>
                         <div>
-                            <img src="https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg" />
+                            <img className={"home-preview-image"} src={"/static/images/slide_show/image1.png"} />
                         </div>
                         <div>
-                            <img src="https://cdn.pixabay.com/photo/2016/01/19/17/41/friends-1149841_960_720.jpg" />
+                            <img style={{ transform: 'translateY(-35%)'}} src={"/static/images/slide_show/image2.png"} />
                         </div>
                         <div>
-                            <img src="https://cdn.pixabay.com/photo/2018/03/26/20/49/tiger-3264048_960_720.jpg" />
+                            <img style={{ transform: 'translateY(-20%)'}} src={"/static/images/slide_show/image3.png"} />
                         </div>
                     </Carousel>
                 </div>
