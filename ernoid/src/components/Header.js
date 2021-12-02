@@ -88,11 +88,11 @@ export default function Header() {
 
                 <div className={width > 720 ? "header-navigation" : "header-navigation-small"}>
                     <Grid container direction="row" justify="center" alignItems="center">
-                        <Button className={"header-dropdown-home"} as={Link} to={"/"}
+                        <Button className={width > 720 ? "header-dropdown-toggle" : "header-dropdown-toggle-small"} as={Link} to={"/"}
                                 style={pathname==="/" ? {color: 'white'} : {color: '#828282'}}>HOME</Button>
                         <div className={"header-dropdown-container"}>
                             <Dropdown>
-                              <Dropdown.Toggle className={"header-dropdown-toggle"}
+                              <Dropdown.Toggle className={width > 720 ? "header-dropdown-toggle" : "header-dropdown-toggle-small"}
                                                style={pathname==="/all-collections" || pathname.includes("/collection/") ? {color: 'white'} : {color: '#828282'}}>COLLECTIONS</Dropdown.Toggle>
                                 {/* TODO: Dynamically add collections to the menu page */}
                                 <Dropdown.Menu className={"header-dropdown-menu"}>
@@ -106,7 +106,7 @@ export default function Header() {
 
                         <div className={"header-dropdown-container"}>
                             <Dropdown>
-                              <Dropdown.Toggle className={"header-dropdown-toggle"}
+                              <Dropdown.Toggle className={width > 720 ? "header-dropdown-toggle" : "header-dropdown-toggle-small"}
                                                style={pathname.includes("/clothes/") ? {color: 'white'} : {color: '#828282'}}>CLOTHES</Dropdown.Toggle>
 
                                 {/* TODO: dynamic arī vajadzētu :) */}
