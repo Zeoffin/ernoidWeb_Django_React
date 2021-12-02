@@ -31,7 +31,7 @@ export default class App extends Component {
 
     render() {
         return (
-            <Grid style={{overflowY: 'scroll'}}>
+            <Grid style={{overflowY: 'scroll', overflowX: 'hidden'}}>
                 <Router>
                     <Header/>
                     <Switch>
