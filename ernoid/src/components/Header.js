@@ -74,7 +74,14 @@ export default function Header() {
         if (width > 720) {
             return <img className={"header-logo"} src={"/static/images/branding/ERNOID_Typography_White.png"}/>
         } else {
-            return <img className={"header-logo-small"} src={"/static/images/branding/ERNOID_Logo_White.png"}/>
+            return <img className={"header-logo"} src={"/static/images/branding/ERNOID_Logo_White.png"}/>
+        }
+    }
+
+    function displayHomeButton() {
+        if (width > 720) {
+            return <Button className={width > 720 ? "header-dropdown-toggle" : "header-dropdown-toggle-small"} as={Link} to={"/"}
+                                style={pathname==="/" ? {color: 'white'} : {color: '#828282'}}>HOME</Button>
         }
     }
 
@@ -88,8 +95,9 @@ export default function Header() {
 
                 <div className={width > 720 ? "header-navigation" : "header-navigation-small"}>
                     <Grid container direction="row" justify="center" alignItems="center">
-                        <Button className={width > 720 ? "header-dropdown-toggle" : "header-dropdown-toggle-small"} as={Link} to={"/"}
-                                style={pathname==="/" ? {color: 'white'} : {color: '#828282'}}>HOME</Button>
+
+                        {displayHomeButton()}
+
                         <div className={"header-dropdown-container"}>
                             <Dropdown>
                               <Dropdown.Toggle className={width > 720 ? "header-dropdown-toggle" : "header-dropdown-toggle-small"}
